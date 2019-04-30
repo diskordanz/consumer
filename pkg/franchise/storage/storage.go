@@ -1,0 +1,13 @@
+package storage
+
+import (
+	"github.com/diskordanz/consumer/pkg/franchise/model"
+)
+
+type FranchiseStorage interface {
+	// Get list of size *count* of franchises starting from *offset*
+	List(count, offset int) ([]model.Franchise, error)
+	Get(int) (model.Franchise, error)
+	SearchFranchisesByName(count, offset int, name string) ([]model.Franchise, error)
+	GetListByCountryId(countryID, count, offset int) ([]model.Franchise, error)
+}
