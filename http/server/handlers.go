@@ -20,6 +20,7 @@ func (api *ConsumerAPI) ListFranchises(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, franchises)
 }
 
@@ -186,4 +187,8 @@ func WriteEntityAndHeader(w *http.ResponseWriter, entity interface{}) {
 		return
 	}
 	writer.Write(b)
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FranchiseService } from '../franchise.service';
+import Franchise from '../Franchise';
 
 @Component({
   selector: 'app-franchise-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FranchiseListComponent implements OnInit {
 
-  constructor() { }
+  franchises: Franchise[];
+
+  constructor(private fr: FranchiseService) { }
 
   ngOnInit() {
+    this.fr
+      .listFranchises()
+      .subscribe((data: Franchise[]) => {
+        this.franchises = data;
+    });
   }
-
-}
+} 
+  
