@@ -9,11 +9,14 @@ import { FranchiseService } from './franchise.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {AlertModule } from 'ngx-bootstrap';
+import { LocationListComponent } from './location-list/location-list.component';
+import { LocationService } from './location.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FranchiseListComponent
+    FranchiseListComponent,
+    LocationListComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import {AlertModule } from 'ngx-bootstrap';
     HttpClientModule,
     AlertModule.forRoot()
   ],
-  providers: [FranchiseService],
+  providers: [FranchiseService, LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -67,6 +67,7 @@ func (api *ConsumerAPI) GetLocationsOfFranchise(w http.ResponseWriter, r *http.R
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, locations)
 }
 

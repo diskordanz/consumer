@@ -5,13 +5,23 @@ import (
 )
 
 type Location struct {
-	ID          uint64 `json:"id"`
-	FranchiseID int    `json:"franchise_id"`
-	Name        string `json:"name"`
+	ID           uint64 `json:"id"`
+	FranchiseID  int    `json:"franchise_id"`
+	City         string `json:"city"`
+	Locality     string `json:"inhabited_locality"`
+	Adress       string `json:"adress"`
+	OpeningHours string `json:"opening_hours"`
 }
 
 func MapToLocation(originLocation pkgLocationModel.Location) Location {
-	return Location{ID: originLocation.ID, Name: originLocation.Name}
+	return Location{
+		ID:           originLocation.ID,
+		City:         originLocation.City,
+		FranchiseID:  originLocation.FranchiseID,
+		Locality:     originLocation.Locality,
+		Adress:       originLocation.Adress,
+		OpeningHours: originLocation.OpeningHours,
+	}
 }
 
 func MapToLocationsList(originList []pkgLocationModel.Location) []Location {

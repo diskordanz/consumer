@@ -5,13 +5,15 @@ import (
 )
 
 type Franchise struct {
-	ID        uint64 `json:"id"`
-	CountryID int    `json:"country_id"`
-	Name      string `json:"name"`
+	ID          uint64 `json:"id"`
+	CountryID   int    `json:"country_id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Image       string `json:"image"`
 }
 
 func MapToFranchise(originFranchise pkgFranchiseModel.Franchise) Franchise {
-	return Franchise{ID: originFranchise.ID, Name: originFranchise.Name, CountryID: originFranchise.CountryID}
+	return Franchise{ID: originFranchise.ID, Name: originFranchise.Name, CountryID: originFranchise.CountryID, Image: originFranchise.Image, Description: originFranchise.Description}
 }
 
 func MapToFranchiseList(originList []pkgFranchiseModel.Franchise) []Franchise {

@@ -5,4 +5,5 @@ type Franchise struct {
 	CountryID   int
 	Name        string
 	Description string
+	Image       string
 }

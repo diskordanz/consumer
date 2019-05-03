@@ -1,0 +1,15 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+      <td>Адрес</td>
+      <td>Режим работы</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let location of locations">
+          <td>{{ location.inhabited_locality}}, {{ location.adress }}</td>
+          <td>{{ location.opening_hours }}</td>
+      </tr>
+  </tbody>
+</table>

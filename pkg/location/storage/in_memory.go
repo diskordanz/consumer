@@ -14,14 +14,18 @@ type InMemoryLocationStorage struct {
 
 func NewInMemoryLocationStorage() InMemoryLocationStorage {
 	db := []model.Location{
-		model.Location{ID: 1, Name: "1", Description: "Eto evrik", FranchiseID: 1},
-		model.Location{ID: 2, Name: "2", Description: "Eto kopeechka", FranchiseID: 2},
-		model.Location{ID: 3, Name: "3", Description: "Eto dobryk", FranchiseID: 2},
+		model.Location{ID: 1, City: "Гомель", FranchiseID: 1, Locality: "Березки", Adress: "ул. 60 лет СССР, 10В", OpeningHours: "08:00-23:00"},
+		model.Location{ID: 2, City: "Гомель", FranchiseID: 1, Locality: "Большевик", Adress: "ул.Советская, 36", OpeningHours: "08:00-22:00"},
+		model.Location{ID: 3, City: "Гомель", FranchiseID: 1, Locality: "Брагин", Adress: "ул.Советская, 21", OpeningHours: "08:00-22:00"},
+		model.Location{ID: 4, City: "Гомель", FranchiseID: 1, Locality: "Гомель", Adress: "пр-т Речицкий, 5в", OpeningHours: "09:00-23:00"},
+
+		model.Location{ID: 5, City: "Гомель", FranchiseID: 2, Locality: "Гомель", Adress: "ул. Косарева 18", OpeningHours: "09:00-23:00"},
+		model.Location{ID: 6, City: "Минск", FranchiseID: 2, Locality: "Минск", Adress: "Игуменский тракт, 30", OpeningHours: "09:00-23:00"},
 	}
 	return InMemoryLocationStorage{db: db}
 }
 
-func (s InMemoryLocationStorage) ListOfFranchise(id, count, offset int) ([]model.Location, error) {
+func (s InMemoryLocationStorage) ListOfLocations(id, count, offset int) ([]model.Location, error) {
 	result := linq.From(s.db).Where(func(c interface{}) bool {
 		return c.(model.Location).FranchiseID == id
 	}).Skip(offset).Take(count)
@@ -37,9 +41,9 @@ func (s InMemoryLocationStorage) Get(id int) (model.Location, error) {
 	return s.db[id], nil
 }
 
-func (s InMemoryLocationStorage) ListOfFranchiseByName(id, count, offset int, name string) ([]model.Location, error) {
+func (s InMemoryLocationStorage) ListOfLocationsByName(id, count, offset int, name string) ([]model.Location, error) {
 	result := linq.From(s.db).Where(func(c interface{}) bool {
-		return strings.Contains(strings.ToLower((c.(model.Location).Name)), strings.ToLower(name)) && c.(model.Location).FranchiseID == id
+		return strings.Contains(strings.ToLower((c.(model.Location).City)), strings.ToLower(name)) && c.(model.Location).FranchiseID == id
 	}).Skip(offset).Take(count)
 	var slice []model.Location
 	result.ToSlice(&slice)
