@@ -14,12 +14,12 @@ type InMemoryFranchiseStorage struct {
 
 func NewInMemoryFranchiseStorage() InMemoryFranchiseStorage {
 	db := []model.Franchise{
-		model.Franchise{ID: 1, CountryID: 1, Name: "Евроопт", Description: "Eto evrik", Image: "logo_evroopt.jpg"},
-		model.Franchise{ID: 2, CountryID: 1, Name: "Гиппо", Description: "Eto gippo", Image: "logo_gippo.jpg"},
-		model.Franchise{ID: 3, CountryID: 2, Name: "Доброном", Description: "Eto dobryk", Image: "logo_dobronom.jpg"},
-		model.Franchise{ID: 4, CountryID: 2, Name: "5 Элемент", Description: "Eto 5 element", Image: "logo_5element.png"},
-		model.Franchise{ID: 5, CountryID: 2, Name: "Электросила", Description: "Eto sila", Image: "logo_electrosila.jpg"},
-		model.Franchise{ID: 6, CountryID: 2, Name: "Карусель", Description: "Eto karusel", Image: "logo_karusel.png"},
+		model.Franchise{ID: 1, CountryID: 1, Name: "Евроопт", Description: "Евроопт - сеть магазинов по всей Беларуси. Продукты питания и потребительские товары.", Image: "logo_evroopt.jpg"},
+		model.Franchise{ID: 2, CountryID: 1, Name: "Гиппо", Description: "Гиппо - сеть гипермаркетов, супермаркетов. Продукты питания, товары для дома, изделия собственного производства.", Image: "logo_gippo.jpg"},
+		model.Franchise{ID: 3, CountryID: 2, Name: "Доброном", Description: "", Image: "logo_dobronom.jpg"},
+		model.Franchise{ID: 4, CountryID: 2, Name: "5 Элемент", Description: "5 элемент - продажа бытовой техники и аудио-видео в Беларуси. Официальное дилерство ведущих мировых производителей.", Image: "logo_5element.png"},
+		model.Franchise{ID: 5, CountryID: 2, Name: "Электросила", Description: "Электросила - оптовая и розничная торговля бытовой техникой и электроникой.", Image: "logo_electrosila.jpg"},
+		model.Franchise{ID: 6, CountryID: 2, Name: "Карусель", Description: "", Image: "logo_karusel.png"},
 	}
 	return InMemoryFranchiseStorage{db: db}
 }

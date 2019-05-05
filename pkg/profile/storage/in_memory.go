@@ -7,21 +7,20 @@ import (
 )
 
 type InMemoryProfileStorage struct {
-	db []model.Profile
+	db []model.Consumer
 }
 
 func NewInMemoryProfileStorage() InMemoryProfileStorage {
-	db := []model.Profile{
-		model.Profile{ID: 1, Name: "Evroopt"},
-		model.Profile{ID: 2, Name: "Kopeechka"},
-		model.Profile{ID: 3, Name: "Dobryk"},
+	db := []model.Consumer{
+		model.Consumer{ID: 1, FirstName: "Надежда", LastName: "Барсукова", PhoneNumber: "+375(99)99-99-999", City: "Гомель", Adress: "Ерёмино", Login: "nadya", Mail: "nadya@gmail.com", Password: "1111"},
+		model.Consumer{ID: 2, FirstName: "Consumer2", LastName: "", PhoneNumber: "", City: "", Adress: "", Login: "consumer2", Mail: "", Password: "2222"},
 	}
 	return InMemoryProfileStorage{db: db}
 }
 
-func (s InMemoryProfileStorage) Get(id int) (model.Profile, error) {
+func (s InMemoryProfileStorage) Get(id int) (model.Consumer, error) {
 	if id > len(s.db) || id < 0 {
-		return model.Profile{}, errors.New("error. no such entry in database")
+		return model.Consumer{}, errors.New("error. no such entry in database")
 	}
 	return s.db[id], nil
 }

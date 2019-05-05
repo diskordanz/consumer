@@ -13,9 +13,10 @@ type InMemoryProductStorage struct {
 
 func NewInMemoryProductStorage() InMemoryProductStorage {
 	db := []model.Product{
-		model.Product{ID: 1, Name: "Evroopt", Description: "Eto evrik"},
-		model.Product{ID: 2, Name: "Kopeechka", Description: "Eto kopeechka"},
-		model.Product{ID: 3, Name: "Dobryk", Description: "Eto dobryk"},
+		model.Product{ID: 1, Name: "Сок Добрый", Description: "Очень добрый", Image: "", FranchiseID: 1, Count: 0, Price: 0},
+		model.Product{ID: 2, Name: "", Description: "", Image: "", FranchiseID: 1, Count: 0, Price: 0},
+		model.Product{ID: 3, Name: "", Description: "", Image: "", FranchiseID: 1, Count: 0, Price: 0},
+		model.Product{ID: 4, Name: "", Description: "", Image: "", FranchiseID: 1, Count: 0, Price: 0},
 	}
 	return InMemoryProductStorage{db: db}
 }

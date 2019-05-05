@@ -22,7 +22,7 @@ func (api *ConsumerAPI) AssignRoutes() {
 	// to get franchise list -> api/franchises?count=<number>&offset=<number> | count and offset are used for pagination
 	api.router.HandleFunc("/api/franchises", api.ListFranchises).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}")
 	//api.router.HandleFunc("/api/franchises", api.GetFranchisesByName).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}", "name", "{name}")
-
+	api.router.HandleFunc("/api/franchises/{id}", api.GetFranchise).Methods("GET")
 	api.router.HandleFunc("/api/franchises/{id}/locations", api.GetLocationsOfFranchise).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}")
 	//api.router.HandleFunc("/api/franchises/{id}/locations", api.GetLocationsOfFranchiseByName).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}", "name", "{name}")
 

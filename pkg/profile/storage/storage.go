@@ -6,5 +6,5 @@ import (
 
 type ProfileStorage interface {
 	// Get list of size *count* of Profiles starting from *offset*
-	Get(int) (model.Profile, error)
+	Get(int) (model.Consumer, error)
 }

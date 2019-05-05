@@ -34,6 +34,7 @@ func (api *ConsumerAPI) GetFranchise(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, franchise)
 }
 
@@ -52,6 +53,8 @@ func (api *ConsumerAPI) GetFranchisesByName(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	log.Printf("request on getFranchisesByName with name=%s", name)
+
+	enableCors(&w)
 	WriteEntityAndHeader(&w, franchiseList)
 }
 
@@ -84,6 +87,7 @@ func (api *ConsumerAPI) GetLocationsOfFranchiseByName(w http.ResponseWriter, r *
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, locations)
 }
 
@@ -93,6 +97,7 @@ func (api *ConsumerAPI) ListCategories(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, categories)
 }
 
@@ -107,6 +112,7 @@ func (api *ConsumerAPI) ListProducts(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, products)
 }
 
@@ -120,6 +126,7 @@ func (api *ConsumerAPI) GetProduct(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, product)
 }
 
@@ -133,6 +140,7 @@ func (api *ConsumerAPI) GetProfile(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, profile)
 }
 
@@ -148,6 +156,7 @@ func (api *ConsumerAPI) GetCart(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, cart)
 }*/
 
@@ -163,6 +172,7 @@ func (api *ConsumerAPI) ListOrders(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, orders)
 }
 
@@ -177,6 +187,7 @@ func (api *ConsumerAPI) GetOrder(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	enableCors(&w)
 	WriteEntityAndHeader(&w, order)
 }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FranchiseService } from '../franchise.service';
-import Franchise from '../franchise';
+import { CommonService } from '../common.service';
+import { Franchise } from '../models';
 
 const pathToImage = "../../assets/img/"
 
@@ -15,10 +15,10 @@ export class FranchiseListComponent implements OnInit {
   franchises: Franchise[];
   public pathToImage = pathToImage;
 
-  constructor(private fr: FranchiseService) { }
+  constructor(private s: CommonService) { }
  
   ngOnInit() {
-    this.fr
+    this.s
       .listFranchises()
       .subscribe((data: Franchise[]) => {
         this.franchises = data;

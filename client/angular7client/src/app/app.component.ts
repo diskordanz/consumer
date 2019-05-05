@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
+import {CommonService } from './common.service'
 import { NavigationCancel,
         Event,
         NavigationEnd,
         NavigationError,
         NavigationStart,
         Router } from '@angular/router';
+import { Category } from './models';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ import { NavigationCancel,
 })
 export class AppComponent {
   title = 'angular7crud';
-  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router) {
+  constructor(private _loadingBar: SlimLoadingBarService, private _router: Router, private s: CommonService) {
     this._router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
@@ -32,5 +34,15 @@ export class AppComponent {
     if (event instanceof NavigationError) {
       this._loadingBar.stop();
     }
+  }
+
+  categories: Category[];
+ 
+  ngOnInit() {
+    this.s
+      .listCategories()
+      .subscribe((data: Category[]) => {
+        this.categories = data;
+    });
   }
 }

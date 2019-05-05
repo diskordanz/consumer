@@ -1,9 +1,17 @@
+
+<div *ngIf="franchise">
+  <img class="img-fluid" src={{pathToImage}}{{franchise.image}} width="50%"/>
+</div>
+<div class="row">
+  <div style="width:50%;">{{ franchise.description }}</div>
+  <div><button type="button" class="btn btn-dark btn-lg">За покупками!</button></div>
+</div>
 <table class="table table-hover">
   <thead>
-  <tr>
+    <tr>
       <td>Адрес</td>
       <td>Режим работы</td>
-  </tr>
+    </tr>
   </thead>
 
   <tbody>

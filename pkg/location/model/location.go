@@ -7,4 +7,5 @@ type Location struct {
 	Locality     string
 	Adress       string
 	OpeningHours string
+	Type         string
 }
