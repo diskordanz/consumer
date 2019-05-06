@@ -1,3 +1,65 @@
-<p>
-  profile works!
-</p>
+<!--<div>
+    <form [formGroup]="editForm" novalidate>
+        <label>
+          {{ profile.first_name }}
+          <input type="text" formControlName="name">
+        </label>
+        <div *ngIf="editForm.get('first_name').dirty && editForm.get('first_name').pending">
+          {{ form.validating }}
+        </div>
+        
+        <label>
+            {{ profile.last_name }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('last_name').dirty && editForm.get('last_name').pending">
+            {{ form.validating }}
+          </div>
+          
+          <label>
+            {{ profile.phone_number }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('phone_number').dirty && editForm.get('phone_number').pending">
+            {{ form.validating }}
+          </div>
+
+
+          <label>
+            {{ profile.city }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('city').dirty && editForm.get('city').pending">
+            {{ form.validating }}
+          </div> 
+
+          <label>
+            {{ profile.address }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('address').dirty && editForm.get('address').pending">
+            {{ form.validating }}
+          </div>
+
+          <label>
+            {{ profile.login }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('login').dirty && editForm.get('login').pending">
+            {{ form.validating }}
+          </div>
+
+          <label>
+            {{ profile.mail }}
+            <input type="text" formControlName="name">
+          </label>
+          <div *ngIf="editForm.get('mail').dirty && editForm.get('mail').pending">
+            {{ form.validating }}
+          </div>
+        <p>
+          <button (click)="onSubmit()" [disabled]="editForm.invalid" class="submit-btn">Submit</button>
+          <button (click)="resetForm()" class="reset-btn">Reset</button>
+        </p>
+      </form>
+</div>
+-->

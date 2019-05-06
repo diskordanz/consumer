@@ -28,12 +28,12 @@ func main() {
 	productStorage := pStorage.NewInMemoryProductStorage()
 	profileStorage := uStorage.NewInMemoryProfileStorage()
 
-	franchiseHandler := *fHandler.NewFranchiseHandler(franchiseStorage)
-	categoryHandler := *cHandler.NewCategoryHandler(categoryStorage)
-	locationHandler := *lHandler.NewLocationHandler(locationStorage)
-	orderHandler := *oHandler.NewOrderHandler(orderStorage)
-	productHandler := *pHandler.NewProductHandler(productStorage)
-	profileHandler := *uHandler.NewProfileHandler(profileStorage)
+	franchiseHandler := fHandler.NewFranchiseHandler(franchiseStorage)
+	categoryHandler := cHandler.NewCategoryHandler(categoryStorage)
+	locationHandler := lHandler.NewLocationHandler(locationStorage)
+	orderHandler := oHandler.NewOrderHandler(orderStorage)
+	productHandler := pHandler.NewProductHandler(productStorage)
+	profileHandler := uHandler.NewProfileHandler(profileStorage)
 
 	srv := service.NewConsumerService(franchiseHandler, locationHandler, categoryHandler, productHandler, orderHandler, profileHandler)
 

@@ -1,0 +1,9 @@
+:host {
+    font-family: 'Lato', sans-serif;
+    color: #666666;
+    font-size: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

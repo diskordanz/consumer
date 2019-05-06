@@ -2,6 +2,7 @@ package storage
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/ahmetb/go-linq"
 	"github.com/diskordanz/consumer/pkg/product/model"
@@ -21,8 +22,13 @@ func NewInMemoryProductStorage() InMemoryProductStorage {
 	return InMemoryProductStorage{db: db}
 }
 
-func (s InMemoryProductStorage) List(count, offset int) ([]model.Product, error) {
-	result := linq.From(s.db).Skip(offset).Take(count)
+func (s InMemoryProductStorage) List(name string, count, offset int) ([]model.Product, error) {
+	result := linq.From(s.db).Where(func(c interface{}) bool {
+		return strings.Contains(strings.ToLower((c.(model.Product).Name)), strings.ToLower(name))
+	}).Skip(offset).Take(count)
+
+	//result := linq.From(s.db).Skip(offset).Take(count)
+
 	var slice []model.Product
 	result.ToSlice(&slice)
 	return slice, nil

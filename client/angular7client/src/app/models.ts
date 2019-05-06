@@ -45,7 +45,7 @@ export class Consumer{
   last_name: string;
   phone_number: string;
   city: string;
-  adress: string;
+  address: string;
   cart: Map<number, number>;
   login: string;
   mail: string;

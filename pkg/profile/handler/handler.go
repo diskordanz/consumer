@@ -13,6 +13,6 @@ func NewProfileHandler(fs storage.ProfileStorage) *ProfileHandler {
 	return &ProfileHandler{fs: fs}
 }
 
-func (h *ProfileHandler) GetProfile(id int) (model.Profile, error) {
+func (h *ProfileHandler) GetProfile(id int) (model.Consumer, error) {
 	return h.fs.Get(id)
 }

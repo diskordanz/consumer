@@ -13,8 +13,8 @@ func NewProductHandler(ps storage.ProductStorage) *ProductHandler {
 	return &ProductHandler{ps: ps}
 }
 
-func (h *ProductHandler) ListProducts(count, offset int) ([]model.Product, error) {
-	return h.ps.List(count, offset)
+func (h *ProductHandler) ListProducts(name string, count, offset int) ([]model.Product, error) {
+	return h.ps.List(name, count, offset)
 }
 
 func (h *ProductHandler) GetProductById(id int) (model.Product, error) {

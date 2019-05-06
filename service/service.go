@@ -21,29 +21,31 @@ type Service interface {
 	ListCategories() ([]model.Category, error)
 
 	GetProduct(int) (model.Product, error)
-	ListProducts(count, offset int) ([]model.Product, error)
-	GetProfile(int) (model.Profile, error)
+	ListProducts(name string, count, offset int) ([]model.Product, error)
+	GetConsumer(int) (model.Consumer, error)
 	GetOrder(consumerID, orderID int) (model.Order, error)
 	ListOrders(id, count, offset int) ([]model.Order, error)
+
+	Healthcheck() error
 }
 
 type ConsumerService struct {
-	fh fHandler.FranchiseHandler
-	lh lHandler.LocationHandler
-	ch cHandler.CategoryHandler
-	ph pHandler.ProductHandler
-	oh oHandler.OrderHandler
-	uh uHandler.ProfileHandler
+	fh *fHandler.FranchiseHandler
+	lh *lHandler.LocationHandler
+	ch *cHandler.CategoryHandler
+	ph *pHandler.ProductHandler
+	oh *oHandler.OrderHandler
+	uh *uHandler.ProfileHandler
 }
 
 // все проверки и запросы к сервису auth / user / roles производятся на уровне сервиса (т.е. бизнес-логики)
 
 func NewConsumerService(
-	fh fHandler.FranchiseHandler,
-	lh lHandler.LocationHandler,
-	ch cHandler.CategoryHandler,
-	ph pHandler.ProductHandler,
-	oh oHandler.OrderHandler,
-	uh uHandler.ProfileHandler) Service {
+	fh *fHandler.FranchiseHandler,
+	lh *lHandler.LocationHandler,
+	ch *cHandler.CategoryHandler,
+	ph *pHandler.ProductHandler,
+	oh *oHandler.OrderHandler,
+	uh *uHandler.ProfileHandler) Service {
 	return ConsumerService{fh: fh, uh: uh, lh: lh, ch: ch, ph: ph, oh: oh}
 }

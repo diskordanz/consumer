@@ -33,7 +33,7 @@ func MapToProfile(originProfile pkgProfileModel.Consumer) Consumer {
 }
 
 func MapToProfileList(originList []pkgProfileModel.Consumer) []Consumer {
-	resultList := make([]Profile, len(originList), len(originList))
+	resultList := make([]Consumer, len(originList), len(originList))
 	for i, v := range originList {
 		resultList[i] = MapToProfile(v)
 	}

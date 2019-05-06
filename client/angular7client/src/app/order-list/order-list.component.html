@@ -1,3 +1,15 @@
-<p>
-  order-list works!
-</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>User</td>
+      <td>Products</td>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let order of orders">
+          <td>{{ order.user_id  }}</td>
+          <td>{{ order.products }}</td>
+      </tr>
+  </tbody>
+</table>

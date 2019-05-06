@@ -105,8 +105,9 @@ func (api *ConsumerAPI) ListProducts(w http.ResponseWriter, r *http.Request) {
 	requestVariables := mux.Vars(r)
 	count, _ := strconv.Atoi(requestVariables["count"])
 	offset, _ := strconv.Atoi(requestVariables["offset"])
+	name, _ := requestVariables["name"]
 
-	products, err := api.ss.ListProducts(count, offset)
+	products, err := api.ss.ListProducts(name, count, offset)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -130,18 +131,18 @@ func (api *ConsumerAPI) GetProduct(w http.ResponseWriter, r *http.Request) {
 	WriteEntityAndHeader(&w, product)
 }
 
-func (api *ConsumerAPI) GetProfile(w http.ResponseWriter, r *http.Request) {
+func (api *ConsumerAPI) GetConsumer(w http.ResponseWriter, r *http.Request) {
 	requestVariables := mux.Vars(r)
 	id, _ := strconv.Atoi(requestVariables["id"])
 
-	profile, err := api.ss.GetProfile(id)
+	consumer, err := api.ss.GetConsumer(id)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	enableCors(&w)
-	WriteEntityAndHeader(&w, profile)
+	WriteEntityAndHeader(&w, consumer)
 }
 
 /*
@@ -203,4 +204,12 @@ func WriteEntityAndHeader(w *http.ResponseWriter, entity interface{}) {
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
+func (api *ConsumerAPI) Healthcheck(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	if api == nil || api.ss == nil || api.ss.Healthcheck() != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+	w.WriteHeader(http.StatusOK)
 }

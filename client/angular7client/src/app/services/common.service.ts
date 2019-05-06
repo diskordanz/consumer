@@ -34,10 +34,10 @@ export class CommonService {
            .get(`${this.uri}/categories`);
   }
 
-  listProducts() {
+  listProducts(name: string) {
     return this
            .http
-           .get(`${this.uri}/products?count=10&offset=0`);
+           .get(`${this.uri}/products?count=10&offset=0&name=${name}`);
   }
 
   listProductsOfFranchise(id: number) {

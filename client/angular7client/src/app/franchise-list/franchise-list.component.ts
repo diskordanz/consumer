@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from '../common.service';
+import { CommonService } from '../services/common.service';
 import { Franchise } from '../models';
 
 const pathToImage = "../../assets/img/"

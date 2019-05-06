@@ -1,6 +1,10 @@
 package service
 
-import "github.com/diskordanz/consumer/service/model"
+import (
+	"errors"
+
+	"github.com/diskordanz/consumer/service/model"
+)
 
 func (s ConsumerService) GetFranchise(id int) (model.Franchise, error) {
 	franchise, err := s.fh.GetFranchise(id)
@@ -66,31 +70,30 @@ func (s ConsumerService) ListCategories() ([]model.Category, error) {
 /////////////////////////////////////////////////////
 
 func (s ConsumerService) ListOrders(id, count, offset int) ([]model.Order, error) {
-	// list, err := s.fh.ListFranchises(count, offset)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// result := model.MapToFranchiseList(list)
-	return nil, nil
+	list, err := s.oh.ListOrders(id, count, offset)
+	if err != nil {
+		return nil, err
+	}
+	result := model.MapToOrderList(list)
+	return result, nil
 }
 
 func (s ConsumerService) GetProduct(id int) (model.Product, error) {
-	// product, err := s.ph.GetProductById(id)
-	// if err != nil {
-	// 	return model.Product{}, err
-	// }
-	// resultProduct := model.MapToProduct(product)
-	var x model.Product
-	return x, nil
+	product, err := s.ph.GetProductById(id)
+	if err != nil {
+		return model.Product{}, err
+	}
+	resultProduct := model.MapToProduct(product)
+	return resultProduct, nil
 }
 
-func (s ConsumerService) ListProducts(count, offset int) ([]model.Product, error) {
-	// products, err := s.ph.ListProducts(count, offset)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// result := model.MapToProductsList(products)
-	return nil, nil
+func (s ConsumerService) ListProducts(name string, count, offset int) ([]model.Product, error) {
+	products, err := s.ph.ListProducts(name, count, offset)
+	if err != nil {
+		return nil, err
+	}
+	result := model.MapToProductList(products)
+	return result, nil
 }
 
 func (s ConsumerService) ListOfFranchise(franchiseID, count, offset int) ([]model.Location, error) {
@@ -112,12 +115,19 @@ func (s ConsumerService) GetOrder(consumerID, orderID int) (model.Order, error) 
 	return x, nil
 }
 
-func (s ConsumerService) GetProfile(id int) (model.Profile, error) {
+func (s ConsumerService) GetConsumer(id int) (model.Consumer, error) {
 	// product, err := s.uh.GetProductById(id)
 	// if err != nil {
 	// 	return model.Product{}, err
 	// }
 	// resultProduct := model.MapToProduct(product)
-	var x model.Profile
+	var x model.Consumer
 	return x, nil
+}
+
+func (s ConsumerService) Healthcheck() error {
+	if s.fh == nil || s.uh == nil || s.lh == nil || s.ch == nil || s.ph == nil || s.oh == nil {
+		return errors.New("error: problem with database handlers")
+	}
+	return nil
 }
