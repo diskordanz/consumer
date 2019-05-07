@@ -14,18 +14,29 @@ import { map } from 'rxjs/operators';
 export class ProductListComponent implements OnInit {
   state$: Observable<object>; 
   products: Product[];
-
   constructor(public router: ActivatedRoute, private s: CommonService) { }
  
   ngOnInit() {
     this.state$ = this.router.paramMap
     .pipe(map(() => window.history.state))
 
-    console.log(window.history.state.name)
-    this.s.listProducts(window.history.state.name)
-    .subscribe((data: Product[]) => {
-      this.products = data;
-  });
+    if(window.history.state.category_id){
+
+      if(window.history.state.category_id == 1){
+
+      this.s.listProducts(window.history.state.name)
+      .subscribe((data: Product[]) => {
+        this.products = data;});
+      }
+      else {
+      this.s.listProductsByCategory(window.history.state.category_id, window.history.state.name)
+      .subscribe((data: Product[]) => {
+        this.products = data;});
+      } 
   }
-   
-}
+  else{
+    this.s.listProducts("")
+    .subscribe((data: Product[]) => {
+      this.products = data;});
+  }
+}}

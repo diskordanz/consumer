@@ -34,13 +34,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public search(text: string) {
-    if (this.selectedCategory==this.categories[0]) {
       this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigateByUrl('/products',{state: {name: text}}));
-    }
-    else {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-      this.router.navigateByUrl('categories/${this.selectedCategory.id}/products',{state: {name: text}}));
-    }
+      this.router.navigateByUrl('/products',{state: {name: text, category_id: this.selectedCategory.id}}));  
   }
 }

@@ -1,6 +1,32 @@
 <div *ngIf="isLoggedIn(); else loggedOut">
   <h1>
-    Вход/Регистрация
+     {{ login.loggedIn }}
   </h1>
+  <div>
+    <a routerLink="/profile" routerLinkActive="active"> {{ login.viewProfile }}</a>
+  </div>
 </div>
+<ng-template #loggedOut>
+  <h1> {{ login.login }}</h1>
+  <form [formGroup]="loginForm" novalidate>
+    <label>
+      name
+      <input type="text" formControlName="name">
+    </label>
 
+
+    <label>
+      password
+      <input type="password" formControlName="password">
+    </label>
+
+    <label>
+      <button (click)="onLogin()">LOG IN</button>
+    </label>
+<!--
+    <div>
+      <a routerLink="/forgot" routerLinkActive="active"> {{ login.forgot }}</a>
+    </div>
+  -->
+  </form>
+</ng-template>

@@ -10,8 +10,9 @@ type Product struct {
 	Description string  `json:"description"`
 	Image       string  `json:"image"`
 	FranchiseID uint64  `json:"franchise_id"`
-	Count       int32   `json:"count"`
+	Count       uint32  `json:"count"`
 	Price       float32 `json:"price"`
+	CategoryID  uint64  `json:"category_id"`
 }
 
 func MapToProduct(originProduct pkgProductModel.Product) Product {
@@ -23,6 +24,7 @@ func MapToProduct(originProduct pkgProductModel.Product) Product {
 		FranchiseID: originProduct.FranchiseID,
 		Count:       originProduct.Count,
 		Price:       originProduct.Price,
+		CategoryID:  originProduct.CategoryID,
 	}
 }
 

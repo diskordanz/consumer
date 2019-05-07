@@ -25,6 +25,7 @@ import { ProductGetComponent } from './product-get/product-get.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { LoginComponent } from './login/login.component';
     ProfileComponent,
     HeaderComponent,
     LoginComponent,
+    RegistrationComponent,
     ],
   imports: [
     BrowserModule,

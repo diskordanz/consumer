@@ -96,6 +96,15 @@ func (s ConsumerService) ListProducts(name string, count, offset int) ([]model.P
 	return result, nil
 }
 
+func (s ConsumerService) ListProductsByCategory(id uint64, name string, count, offset int) ([]model.Product, error) {
+	products, err := s.ph.ListProductsByCategory(id, name, count, offset)
+	if err != nil {
+		return nil, err
+	}
+	result := model.MapToProductList(products)
+	return result, nil
+}
+
 func (s ConsumerService) ListOfFranchise(franchiseID, count, offset int) ([]model.Location, error) {
 	// locations, err := s.lh.GetLocationsOfFranchise(franchiseID, count, offset)
 	// if err != nil {
@@ -116,13 +125,30 @@ func (s ConsumerService) GetOrder(consumerID, orderID int) (model.Order, error) 
 }
 
 func (s ConsumerService) GetConsumer(id int) (model.Consumer, error) {
-	// product, err := s.uh.GetProductById(id)
-	// if err != nil {
-	// 	return model.Product{}, err
-	// }
-	// resultProduct := model.MapToProduct(product)
-	var x model.Consumer
-	return x, nil
+	consumer, err := s.uh.GetConsumer(id)
+	if err != nil {
+		return model.Consumer{}, err
+	}
+	resultConsumer := model.MapToConsumer(consumer)
+	return resultConsumer, nil
+}
+
+func (s ConsumerService) CreateConsumer(consumer model.Consumer) (model.Consumer, error) {
+	dbConsumer := model.MapToConsumerDB(consumer)
+	c, err := s.uh.CreateConsumer(dbConsumer)
+	if err != nil {
+		return model.Consumer{}, err
+	}
+	return model.MapToConsumer(c), nil
+}
+
+func (s ConsumerService) UpdateConsumer(consumer model.Consumer) (model.Consumer, error) {
+	dbConsumer := model.MapToConsumerDB(consumer)
+	dbConsumer, err := s.uh.UpdateConsumer(dbConsumer)
+	if err != nil {
+		return model.Consumer{}, err
+	}
+	return model.MapToConsumer(dbConsumer), nil
 }
 
 func (s ConsumerService) Healthcheck() error {

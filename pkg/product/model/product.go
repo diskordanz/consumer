@@ -6,6 +6,7 @@ type Product struct {
 	Description string
 	Image       string
 	FranchiseID uint64
-	Count       int32
+	Count       uint32
 	Price       float32
+	CategoryID  uint64
 }
