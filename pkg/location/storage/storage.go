@@ -5,9 +5,7 @@ import (
 )
 
 type LocationStorage interface {
-	// Get list of size *count* of Locations starting from *offset*
-	ListOfLocations(id, count, offset int) ([]model.Location, error)
-	ListOfLocationsByName(id, count, offset int, name string) ([]model.Location, error)
-
+	//ListOfLocationsByName(id, count, offset int, name string) ([]model.Location, error)
+	List(id, count, offset int) ([]model.Location, error)
 	Get(int) (model.Location, error)
 }

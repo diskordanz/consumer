@@ -17,6 +17,6 @@ func (h *OrderHandler) ListOrders(id, count, offset int) ([]model.Order, error) 
 	return h.os.List(id, count, offset)
 }
 
-func (h *OrderHandler) GetOrder(consumerID, orderID int) (model.Order, error) {
-	return h.os.Get(consumerID, orderID)
+func (h *OrderHandler) GetOrder(id int) (model.Order, error) {
+	return h.os.Get(id)
 }

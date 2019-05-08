@@ -5,6 +5,5 @@ import (
 )
 
 type CategoryStorage interface {
-	// Get list of size *count* of Categorys starting from *offset*
 	List() ([]model.Category, error)
 }

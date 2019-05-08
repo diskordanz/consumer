@@ -9,14 +9,14 @@ type Category struct {
 	Name string `json:"name"`
 }
 
-func MapToCategory(originCategory pkgCategoryModel.Category) Category {
-	return Category{ID: originCategory.ID, Name: originCategory.Name}
-}
-
 func MapToCategoryList(originList []pkgCategoryModel.Category) []Category {
 	resultList := make([]Category, len(originList), len(originList))
 	for i, v := range originList {
 		resultList[i] = MapToCategory(v)
 	}
 	return resultList
+}
+
+func MapToCategory(originCategory pkgCategoryModel.Category) Category {
+	return Category{ID: originCategory.ID, Name: originCategory.Name}
 }

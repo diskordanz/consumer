@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -39,26 +38,6 @@ func (api *ConsumerAPI) GetFranchise(w http.ResponseWriter, r *http.Request) {
 	WriteEntityAndHeader(&w, franchise)
 }
 
-func (api *ConsumerAPI) GetFranchisesByName(w http.ResponseWriter, r *http.Request) {
-	requestVariables := mux.Vars(r)
-
-	count, _ := strconv.Atoi(requestVariables["count"])
-	offset, _ := strconv.Atoi(requestVariables["offset"])
-
-	name := requestVariables["name"]
-
-	franchiseList, err := api.ss.SearchFranchisesByName(count, offset, name)
-
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-	log.Printf("request on getFranchisesByName with name=%s", name)
-
-	enableCors(&w)
-	WriteEntityAndHeader(&w, franchiseList)
-}
-
 func (api *ConsumerAPI) GetLocationsOfFranchise(w http.ResponseWriter, r *http.Request) {
 	requestVariables := mux.Vars(r)
 	count, _ := strconv.Atoi(requestVariables["count"])
@@ -66,23 +45,6 @@ func (api *ConsumerAPI) GetLocationsOfFranchise(w http.ResponseWriter, r *http.R
 	offset, _ := strconv.Atoi(requestVariables["offset"])
 
 	locations, err := api.ss.GetLocationsOfFranchise(id, count, offset)
-
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-	enableCors(&w)
-	WriteEntityAndHeader(&w, locations)
-}
-
-func (api *ConsumerAPI) GetLocationsOfFranchiseByName(w http.ResponseWriter, r *http.Request) {
-	requestVariables := mux.Vars(r)
-	count, _ := strconv.Atoi(requestVariables["count"])
-	id, _ := strconv.Atoi(requestVariables["id"])
-	offset, _ := strconv.Atoi(requestVariables["offset"])
-	name := requestVariables["name"]
-
-	locations, err := api.ss.GetLocationsOfFranchiseByName(id, count, offset, name)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -237,10 +199,9 @@ func (api *ConsumerAPI) ListOrders(w http.ResponseWriter, r *http.Request) {
 
 func (api *ConsumerAPI) GetOrder(w http.ResponseWriter, r *http.Request) {
 	requestVariables := mux.Vars(r)
-	consumerID, _ := strconv.Atoi(requestVariables["consumer_id"])
 	orderID, _ := strconv.Atoi(requestVariables["order_id"])
 
-	order, err := api.ss.GetOrder(consumerID, orderID)
+	order, err := api.ss.GetOrder(orderID)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

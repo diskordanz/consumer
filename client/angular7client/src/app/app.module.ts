@@ -1,4 +1,3 @@
-import { ConsumerService } from './services/user.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
  
@@ -53,13 +52,13 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     MatSelectModule
   ],
-  providers: [AuthGuard,
+  providers: [/*AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    },
-    CommonService, ConsumerService],
+    },*/
+    CommonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

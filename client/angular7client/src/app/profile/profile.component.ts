@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import { validateName } from '../validators/name.validator';
 //import { validateAge } from '../validators/age.validator';
 //import { validateDate } from '../validators/date.validator';
-import { ConsumerService } from '../services/user.service';
+import { CommonService } from '../services/common.service';
 import { Consumer } from '../models';
 //import * as moment from 'moment';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   private editForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private userService: ConsumerService,
+    private userService: CommonService,
     private router: Router) { }
 
   ngOnInit() {

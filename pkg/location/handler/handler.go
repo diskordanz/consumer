@@ -14,9 +14,10 @@ func NewLocationHandler(ls storage.LocationStorage) *LocationHandler {
 }
 
 func (h *LocationHandler) GetLocationsOfFranchise(id, count, offset int) ([]model.Location, error) {
-	return h.ls.ListOfLocations(id, count, offset)
+	return h.ls.List(id, count, offset)
 }
 
+/*
 func (h *LocationHandler) GetLocationsOfFranchiseByName(id, count, offset int, name string) ([]model.Location, error) {
 	return h.ls.ListOfLocationsByName(id, count, offset, name)
-}
+}*/

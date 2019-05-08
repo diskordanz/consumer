@@ -24,7 +24,7 @@ func NewInMemoryLocationStorage() InMemoryLocationStorage {
 	return InMemoryLocationStorage{db: db}
 }
 
-func (s InMemoryLocationStorage) ListOfLocations(id, count, offset int) ([]model.Location, error) {
+func (s InMemoryLocationStorage) List(id, count, offset int) ([]model.Location, error) {
 	result := linq.From(s.db).Where(func(c interface{}) bool {
 		return c.(model.Location).FranchiseID == id
 	}).Skip(offset).Take(count)

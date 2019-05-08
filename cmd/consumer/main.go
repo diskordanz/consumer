@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/diskordanz/consumer/http/server"
 
 	cHandler "github.com/diskordanz/consumer/pkg/category/handler"
@@ -11,6 +13,7 @@ import (
 	pHandler "github.com/diskordanz/consumer/pkg/product/handler"
 
 	"github.com/diskordanz/consumer/service"
+	"upper.io/db.v3/postgresql"
 
 	cStorage "github.com/diskordanz/consumer/pkg/category/storage"
 	uStorage "github.com/diskordanz/consumer/pkg/consumer/storage"
@@ -20,13 +23,28 @@ import (
 	pStorage "github.com/diskordanz/consumer/pkg/product/storage"
 )
 
+var dbSettings = postgresql.ConnectionURL{
+	Database: `platform`,
+	Host:     `localhost:5432`,
+	User:     `postgres`,
+	Password: `postgres`,
+}
+
 func main() {
-	franchiseStorage := fStorage.NewInMemoryFranchiseStorage()
-	categoryStorage := cStorage.NewInMemoryCategoryStorage()
-	locationStorage := lStorage.NewInMemoryLocationStorage()
-	orderStorage := oStorage.NewInMemoryOrderStorage()
-	productStorage := pStorage.NewInMemoryProductStorage()
-	consumerStorage := uStorage.NewInMemoryConsumerStorage()
+
+	db, err := postgresql.Open(dbSettings)
+
+	if err != nil {
+		log.Fatalf("error connecting to db: %v", err)
+	}
+	defer db.Close()
+
+	franchiseStorage := fStorage.NewUpperFranchiseStorage(db)
+	categoryStorage := cStorage.NewUpperCategoryStorage(db)
+	locationStorage := lStorage.NewUpperLocationStorage(db)
+	orderStorage := oStorage.NewUpperOrderStorage(db)
+	productStorage := pStorage.NewUpperProductStorage(db)
+	consumerStorage := uStorage.NewUpperConsumerStorage(db)
 
 	franchiseHandler := fHandler.NewFranchiseHandler(franchiseStorage)
 	categoryHandler := cHandler.NewCategoryHandler(categoryStorage)

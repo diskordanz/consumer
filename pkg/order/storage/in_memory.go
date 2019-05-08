@@ -13,7 +13,7 @@ type InMemoryOrderStorage struct {
 
 func NewInMemoryOrderStorage() InMemoryOrderStorage {
 	db := []model.Order{
-		model.Order{ID: 1, UserID: 1, Products: map[int64]int{1: 1, 2: 1, 3: 10}, Date: "5/5/2019", Total: 0, Status: ""},
+		model.Order{ID: 1, ConsumerID: 1, Products: map[int64]int{1: 1, 2: 1, 3: 10}, Date: "5/5/2019", Total: 0, Status: ""},
 	}
 	return InMemoryOrderStorage{db: db}
 }
@@ -25,9 +25,9 @@ func (s InMemoryOrderStorage) List(id, count, offset int) ([]model.Order, error)
 	return slice, nil
 }
 
-func (s InMemoryOrderStorage) Get(consumerID, orderID int) (model.Order, error) {
-	if consumerID > len(s.db) || consumerID < 0 {
+func (s InMemoryOrderStorage) Get(id int) (model.Order, error) {
+	if id > len(s.db) || id < 0 {
 		return model.Order{}, errors.New("error. no such entry in database")
 	}
-	return s.db[consumerID], nil
+	return s.db[id], nil
 }

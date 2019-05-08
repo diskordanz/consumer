@@ -12,8 +12,8 @@ type InMemoryConsumerStorage struct {
 
 func NewInMemoryConsumerStorage() InMemoryConsumerStorage {
 	db := []model.Consumer{
-		model.Consumer{ID: 1, FirstName: "Надежда", LastName: "Барсукова", PhoneNumber: "+375(99)99-99-999", City: "Гомель", Adress: "Ерёмино", Login: "nadya", Mail: "nadya@gmail.com", Password: "1111"},
-		model.Consumer{ID: 2, FirstName: "Consumer2", LastName: "", PhoneNumber: "", City: "", Adress: "", Login: "consumer2", Mail: "", Password: "2222"},
+		model.Consumer{ID: 1, FirstName: "Надежда", LastName: "Барсукова", PhoneNumber: "+375(99)99-99-999", City: "Гомель", Address: "Ерёмино", Login: "nadya", Mail: "nadya@gmail.com", Password: "1111"},
+		model.Consumer{ID: 2, FirstName: "Consumer2", LastName: "", PhoneNumber: "", City: "", Address: "", Login: "consumer2", Mail: "", Password: "2222"},
 	}
 	return InMemoryConsumerStorage{db: db}
 }

@@ -10,6 +10,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { OrderGetComponent } from './order-get/order-get.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuard } from './guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -54,8 +55,13 @@ const routes: Routes = [
     path: 'cart',
     component: CartComponent,
   },
-  { path: 'login', 
+  { 
+    path: 'login', 
     component: LoginComponent, 
+  },
+  { 
+    path: 'registration', 
+    component: RegistrationComponent, 
   },
 ];
 
@@ -64,13 +70,13 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes
     )],
-  exports: [RouterModule],
+  exports: [RouterModule]/*,
   providers: [AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
     }
-  ],
+  ],*/
 })
 export class AppRoutingModule { }

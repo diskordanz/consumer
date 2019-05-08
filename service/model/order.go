@@ -5,22 +5,33 @@ import (
 )
 
 type Order struct {
-	ID       uint64        `json:"id"`
-	UserID   uint64        `json:"user_id"`
-	Products map[int64]int `json:"products"`
-	Date     string        `json:"date"`
-	Total    float32       `json:"total"`
-	Status   string        `json:"status"`
+	ID         uint64        `json:"id"`
+	ConsumerID uint64        `json:"consumer_id"`
+	Products   map[int64]int `json:"products"`
+	Date       string        `json:"date"`
+	Total      float32       `json:"total"`
+	Status     string        `json:"status"`
 }
 
 func MapToOrder(originOrder pkgOrderModel.Order) Order {
 	return Order{
-		ID:       originOrder.ID,
-		UserID:   originOrder.UserID,
-		Products: originOrder.Products,
-		Date:     originOrder.Date,
-		Total:    originOrder.Total,
-		Status:   originOrder.Status,
+		ID:         originOrder.ID,
+		ConsumerID: originOrder.ConsumerID,
+		Products:   originOrder.Products,
+		Date:       originOrder.Date,
+		Total:      originOrder.Total,
+		Status:     originOrder.Status,
+	}
+}
+
+func MapToOrderDB(originOrder Order) pkgOrderModel.Order {
+	return pkgOrderModel.Order{
+		ID:         originOrder.ID,
+		ConsumerID: originOrder.ConsumerID,
+		Products:   originOrder.Products,
+		Date:       originOrder.Date,
+		Total:      originOrder.Total,
+		Status:     originOrder.Status,
 	}
 }
 

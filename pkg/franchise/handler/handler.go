@@ -21,6 +21,7 @@ func (h *FranchiseHandler) GetFranchise(id int) (model.Franchise, error) {
 	return h.fs.Get(id)
 }
 
+/*
 func (h *FranchiseHandler) SearchFranchisesByName(count, offset int, name string) ([]model.Franchise, error) {
 	return h.fs.SearchFranchisesByName(count, offset, name)
-}
+}*/

@@ -13,10 +13,8 @@ import (
 type Service interface {
 	GetFranchise(int) (model.Franchise, error)
 	ListFranchises(count, offset int) ([]model.Franchise, error)
-	SearchFranchisesByName(count, offset int, name string) ([]model.Franchise, error)
 
 	GetLocationsOfFranchise(franchiseID, count, offset int) ([]model.Location, error)
-	GetLocationsOfFranchiseByName(franchiseID, count, offset int, name string) ([]model.Location, error)
 
 	ListCategories() ([]model.Category, error)
 
@@ -24,7 +22,7 @@ type Service interface {
 	ListProducts(name string, count, offset int) ([]model.Product, error)
 	ListProductsByCategory(id uint64, name string, count, offset int) ([]model.Product, error)
 
-	GetOrder(consumerID, orderID int) (model.Order, error)
+	GetOrder(id int) (model.Order, error)
 	ListOrders(id, count, offset int) ([]model.Order, error)
 
 	GetConsumer(int) (model.Consumer, error)

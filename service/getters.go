@@ -24,16 +24,6 @@ func (s ConsumerService) ListFranchises(count, offset int) ([]model.Franchise, e
 	return result, nil
 }
 
-func (s ConsumerService) SearchFranchisesByName(count, offset int, name string) ([]model.Franchise, error) {
-	list, err := s.fh.SearchFranchisesByName(count, offset, name)
-	if err != nil {
-		return nil, err
-	}
-	result := model.MapToFranchiseList(list)
-	return result, nil
-}
-
-/////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 
 func (s ConsumerService) GetLocationsOfFranchise(franchiseID, count, offset int) ([]model.Location, error) {
@@ -45,6 +35,7 @@ func (s ConsumerService) GetLocationsOfFranchise(franchiseID, count, offset int)
 	return result, nil
 }
 
+/*
 func (s ConsumerService) GetLocationsOfFranchiseByName(franchiseID, count, offset int, name string) ([]model.Location, error) {
 	locations, err := s.lh.GetLocationsOfFranchiseByName(franchiseID, count, offset, name)
 	if err != nil {
@@ -52,9 +43,8 @@ func (s ConsumerService) GetLocationsOfFranchiseByName(franchiseID, count, offse
 	}
 	result := model.MapToLocationsList(locations)
 	return result, nil
-}
+}*/
 
-/////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 
 func (s ConsumerService) ListCategories() ([]model.Category, error) {
@@ -67,7 +57,6 @@ func (s ConsumerService) ListCategories() ([]model.Category, error) {
 }
 
 /////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
 
 func (s ConsumerService) ListOrders(id, count, offset int) ([]model.Order, error) {
 	list, err := s.oh.ListOrders(id, count, offset)
@@ -77,6 +66,17 @@ func (s ConsumerService) ListOrders(id, count, offset int) ([]model.Order, error
 	result := model.MapToOrderList(list)
 	return result, nil
 }
+
+func (s ConsumerService) GetOrder(id int) (model.Order, error) {
+	order, err := s.oh.GetOrder(id)
+	if err != nil {
+		return model.Order{}, err
+	}
+	resultOrder := model.MapToOrder(order)
+	return resultOrder, nil
+}
+
+/////////////////////////////////////////////////////////////
 
 func (s ConsumerService) GetProduct(id int) (model.Product, error) {
 	product, err := s.ph.GetProductById(id)
@@ -105,24 +105,7 @@ func (s ConsumerService) ListProductsByCategory(id uint64, name string, count, o
 	return result, nil
 }
 
-func (s ConsumerService) ListOfFranchise(franchiseID, count, offset int) ([]model.Location, error) {
-	// locations, err := s.lh.GetLocationsOfFranchise(franchiseID, count, offset)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// result := model.MapToLocationsList(locations)
-	return nil, nil
-}
-
-func (s ConsumerService) GetOrder(consumerID, orderID int) (model.Order, error) {
-	// product, err := s.uh.GetProductById(id)
-	// if err != nil {
-	// 	return model.Product{}, err
-	// }
-	// resultProduct := model.MapToProduct(product)
-	var x model.Order
-	return x, nil
-}
+////////////////////////////////////////////////////////////////
 
 func (s ConsumerService) GetConsumer(id int) (model.Consumer, error) {
 	consumer, err := s.uh.GetConsumer(id)

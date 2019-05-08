@@ -10,7 +10,7 @@ type Consumer struct {
 	LastName    string        `json:"last_name"`
 	PhoneNumber string        `json:"phone_number"`
 	City        string        `json:"city"`
-	Adress      string        `json:"adress"`
+	Address     string        `json:"address"`
 	Login       string        `json:"login"`
 	Mail        string        `json:"mail"`
 	Password    string        `json:"password"`
@@ -24,7 +24,7 @@ func MapToConsumer(originConsumer pkgConsumerModel.Consumer) Consumer {
 		LastName:    originConsumer.LastName,
 		PhoneNumber: originConsumer.PhoneNumber,
 		City:        originConsumer.City,
-		Adress:      originConsumer.Adress,
+		Address:     originConsumer.Address,
 		Login:       originConsumer.Login,
 		Mail:        originConsumer.Mail,
 		Password:    originConsumer.Password,
@@ -39,7 +39,7 @@ func MapToConsumerDB(originConsumer Consumer) pkgConsumerModel.Consumer {
 		LastName:    originConsumer.LastName,
 		PhoneNumber: originConsumer.PhoneNumber,
 		City:        originConsumer.City,
-		Adress:      originConsumer.Adress,
+		Address:     originConsumer.Address,
 		Login:       originConsumer.Login,
 		Mail:        originConsumer.Mail,
 		Password:    originConsumer.Password,
