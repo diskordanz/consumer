@@ -61,3 +61,34 @@ func (s UpperConsumerStorage) Cart(id, count, offset int) ([]model.CartItem, err
 	}
 	return result, nil
 }
+
+func (s UpperConsumerStorage) CreateCartItem(item model.CartItem) (model.CartItem, error) {
+	_, err := s.db.InsertInto(cartCollection).Columns("consumer_id", "product_id", "count").
+		Values(item.ConsumerID, item.ProductID, item.Count).
+		Exec()
+	if err != nil {
+		return model.CartItem{}, err
+	}
+	return item, nil
+}
+
+func (s UpperConsumerStorage) UpdateCartItem(item model.CartItem) (model.CartItem, error) {
+	_, err := s.db.Update(cartCollection).
+		Set("count", item.Count).
+		Where("id=?", item.ID).
+		Exec()
+	if err != nil {
+		return model.CartItem{}, err
+	}
+	return item, nil
+}
+
+func (s UpperConsumerStorage) GetCartItem(id, productID int) (model.CartItem, error) {
+	result := s.db.Collection(cartCollection).Find().Where("consumer_id=? AND product_id=?", id, productID)
+	var item model.CartItem
+	err := result.One(&item)
+	if err != nil {
+		return model.CartItem{}, err
+	}
+	return item, nil
+}

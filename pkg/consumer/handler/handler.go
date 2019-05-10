@@ -28,3 +28,15 @@ func (h *ConsumerHandler) UpdateConsumer(consumer model.Consumer) (model.Consume
 func (h *ConsumerHandler) GetCart(id, count, offset int) ([]model.CartItem, error) {
 	return h.us.Cart(id, count, offset)
 }
+
+func (h *ConsumerHandler) CreateCartItem(item model.CartItem) (model.CartItem, error) {
+	return h.us.CreateCartItem(item)
+}
+
+func (h *ConsumerHandler) UpdateCartItem(item model.CartItem) (model.CartItem, error) {
+	return h.us.UpdateCartItem(item)
+}
+
+func (h *ConsumerHandler) GetCartItem(id, product_id int) (model.CartItem, error) {
+	return h.us.GetCartItem(id, product_id)
+}

@@ -46,6 +46,15 @@ func MapToCartItem(originItemCart pkgConsumerModel.CartItem, originProduct pkgPr
 	}
 }
 
+func MapToCartItemDB(originItemCart CartItem) pkgConsumerModel.CartItem {
+	return pkgConsumerModel.CartItem{
+		ID:         originItemCart.ID,
+		ConsumerID: originItemCart.ConsumerID,
+		ProductID:  originItemCart.Product.ID,
+		Count:      originItemCart.Count,
+	}
+}
+
 func MapToConsumer(originConsumer pkgConsumerModel.Consumer) Consumer {
 	return Consumer{
 		ID:          originConsumer.ID,

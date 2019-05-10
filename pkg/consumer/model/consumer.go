@@ -13,7 +13,7 @@ type Consumer struct {
 }
 
 type CartItem struct {
-	ID         uint64 `db:"id"`
+	ID         uint64 `db:"id,omitempty"`
 	ConsumerID uint64 `db:"consumer_id"`
 	ProductID  uint64 `db:"product_id"`
 	Count      uint   `db:"count"`

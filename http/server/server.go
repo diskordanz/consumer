@@ -32,6 +32,12 @@ func (api *ConsumerAPI) AssignRoutes() {
 	api.router.HandleFunc("/api/products/{id}", api.GetProduct).Methods("GET")
 	//consumers
 	api.router.HandleFunc("/api/consumers/{id}/cart", api.GetCart).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}")
+	api.router.HandleFunc("/api/consumers/{id}/cart", api.CreateCartItem).Methods("POST")
+	api.router.HandleFunc("/api/consumers/{id}/cart", api.CORS).Methods("OPTIONS")
+	api.router.HandleFunc("/api/consumers/{id}/cart/{item_id}", api.UpdateCartItem).Methods("PUT")
+	api.router.HandleFunc("/api/consumers/{id}/cart/{item_id}", api.CORS).Methods("OPTIONS")
+	api.router.HandleFunc("/api/consumers/{id}/cart", api.GetCartItem).Methods("GET").Queries("product_id", "{product_id}")
+
 	api.router.HandleFunc("/api/consumers/{id}", api.GetConsumer).Methods("GET")
 	api.router.HandleFunc("/api/consumers", api.CreateConsumer).Methods("POST")
 	api.router.HandleFunc("/api/consumers", api.CORS).Methods("OPTIONS")

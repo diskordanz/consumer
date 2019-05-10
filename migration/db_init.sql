@@ -62,10 +62,12 @@ CREATE TABLE consumers(
 CREATE TABLE orders(
   id SERIAL PRIMARY KEY, 
   consumer_id INT NOT NULL,
+  franchise_id INT NOT NULL,
   time TIME,
   total FLOAT,
   status VARCHAR(15),
-  FOREIGN KEY(consumer_id) REFERENCES consumers(id)
+  FOREIGN KEY(consumer_id) REFERENCES consumers(id),
+  FOREIGN KEY(franchise_id) REFERENCES franchises(id)
 );
 
 CREATE TABLE order_items(

@@ -137,6 +137,34 @@ func (s ConsumerService) GetCart(id, count, offset int) ([]model.CartItem, error
 	return result, nil
 }
 
+func (s ConsumerService) GetCartItem(id, productID int) (model.CartItem, error) {
+	cart, err := s.uh.GetCartItem(id, productID)
+	if err != nil {
+		return model.CartItem{}, err
+	}
+
+	result := model.MapToCartItem(cart, pkgProductModel.Product{})
+	return result, nil
+}
+
+func (s ConsumerService) CreateCartItem(item model.CartItem) (model.CartItem, error) {
+	dbItem := model.MapToCartItemDB(item)
+	_, err := s.uh.CreateCartItem(dbItem)
+	if err != nil {
+		return model.CartItem{}, err
+	}
+	return item, nil
+}
+
+func (s ConsumerService) UpdateCartItem(item model.CartItem) (model.CartItem, error) {
+	dbItem := model.MapToCartItemDB(item)
+	_, err := s.uh.UpdateCartItem(dbItem)
+	if err != nil {
+		return model.CartItem{}, err
+	}
+	return item, nil
+}
+
 func (s ConsumerService) CreateConsumer(consumer model.Consumer) (model.Consumer, error) {
 	dbConsumer := model.MapToConsumerDB(consumer)
 	c, err := s.uh.CreateConsumer(dbConsumer)

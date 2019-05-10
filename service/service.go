@@ -30,7 +30,9 @@ type Service interface {
 	CreateConsumer(model.Consumer) (model.Consumer, error)
 	UpdateConsumer(model.Consumer) (model.Consumer, error)
 	GetCart(id, count, offset int) ([]model.CartItem, error)
-
+	GetCartItem(id, productID int) (model.CartItem, error)
+	CreateCartItem(model.CartItem) (model.CartItem, error)
+	UpdateCartItem(model.CartItem) (model.CartItem, error)
 	Healthcheck() error
 }
 

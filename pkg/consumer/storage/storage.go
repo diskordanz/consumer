@@ -9,4 +9,7 @@ type ConsumerStorage interface {
 	Create(model.Consumer) (model.Consumer, error)
 	Update(model.Consumer) (model.Consumer, error)
 	Cart(id, count, offset int) ([]model.CartItem, error)
+	CreateCartItem(model.CartItem) (model.CartItem, error)
+	UpdateCartItem(model.CartItem) (model.CartItem, error)
+	GetCartItem(id, productID int) (model.CartItem, error)
 }

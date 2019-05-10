@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Consumer } from '../models';
+import { Consumer, CartItem } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -99,4 +99,17 @@ export class CommonService {
     return this.http.post<Consumer>(`${this.uri}/consumers`, user);
   }
 
+  createCartItem(item : CartItem): Observable<CartItem>{    
+    return this.http.post<CartItem>(`${this.uri}/consumers/${item.id_consumer}/cart`, item);
+  }
+
+  updateCartItem(item : CartItem): Observable<CartItem>{    
+    return this.http.put<CartItem>(`${this.uri}/consumers/${item.id_consumer}/cart/${item.id}`, item);
+  }
+
+  getCartItem(item : CartItem) {
+    return this
+           .http
+           .get(`${this.uri}/consumers/${item.id_consumer}/cart?product_id=${item.product.id}`);
+  }
 }

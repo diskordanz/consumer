@@ -24,7 +24,7 @@ export class AuthService {
     }); 
     this.router.navigate(["profile"])     
   }
- 
+  
   isLogged():boolean{
     return localStorage.getItem('token') == ""
   }

@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -153,6 +154,62 @@ func (api *ConsumerAPI) GetCart(w http.ResponseWriter, r *http.Request) {
 	}
 	enableCors(&w)
 	WriteEntityAndHeader(&w, cart)
+}
+
+func (api *ConsumerAPI) GetCartItem(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	requestVariables := mux.Vars(r)
+	id, _ := strconv.Atoi(requestVariables["id"])
+	product_id, _ := strconv.Atoi(requestVariables["product_id"])
+
+	item, err := api.ss.GetCartItem(id, product_id)
+
+	if err != nil {
+		return
+	}
+	fmt.Println(item)
+	WriteEntityAndHeader(&w, item)
+}
+
+func (api *ConsumerAPI) CreateCartItem(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	requestVariables := mux.Vars(r)
+	id, _ := strconv.Atoi(requestVariables["id"])
+
+	var reqCartItem model.CartItem
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&reqCartItem); err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+	reqCartItem.ConsumerID = uint64(id)
+	result, err := api.ss.CreateCartItem(reqCartItem)
+	if err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	WriteEntityAndHeader(&w, result)
+}
+
+func (api *ConsumerAPI) UpdateCartItem(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	var reqCartItem model.CartItem
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&reqCartItem); err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+
+	result, err := api.ss.UpdateCartItem(reqCartItem)
+
+	if err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	WriteEntityAndHeader(&w, result)
 }
 
 func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
