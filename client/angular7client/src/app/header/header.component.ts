@@ -20,6 +20,13 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
   }
 
+  isLogged():boolean{
+    return localStorage.getItem('token') != null
+  }
+  
+  notLogged(){
+    return localStorage.getItem('token') == null
+  }
   ngOnInit() {
     this.s
       .listCategories()

@@ -8,6 +8,7 @@ import (
 
 var (
 	consumersCollection = "consumers"
+	cartCollection      = "cart_items"
 )
 
 type UpperConsumerStorage struct {
@@ -49,4 +50,14 @@ func (s UpperConsumerStorage) Get(id int) (model.Consumer, error) {
 	}
 
 	return consumer, nil
+}
+
+func (s UpperConsumerStorage) Cart(id, count, offset int) ([]model.CartItem, error) {
+	cart := s.db.Collection(cartCollection)
+	paginator := cart.Find(db.Cond{"consumer_id": id}).OrderBy("id").Paginate(uint(count))
+	var result []model.CartItem
+	if err := paginator.Page(uint(offset/count + 1)).All(&result); err != nil {
+		return []model.CartItem{}, err
+	}
+	return result, nil
 }

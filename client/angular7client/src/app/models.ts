@@ -46,8 +46,21 @@ export class Consumer{
   phone_number: string;
   city: string;
   address: string;
-  cart: Map<number, number>;
-  login: string;
+  login: string; 
   mail: string;
   password: string;
+}
+
+export class LoginUser {
+  id: number;
+  login: string;
+  password: string;
+  token: string;
+}
+
+export class CartItem {
+  id: number;
+  id_consumer: number;
+  product: Product;
+  count: number;
 }

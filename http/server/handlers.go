@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/diskordanz/consumer/service/model"
 	"github.com/gorilla/mux"
 )
@@ -110,19 +111,48 @@ func (api *ConsumerAPI) GetProduct(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 	WriteEntityAndHeader(&w, product)
 }
+func parseToken(token string) (uint64, error) {
+	var jwtKey = []byte("my_secret_key")
+	claims := jwt.MapClaims{}
+	_, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	if err != nil {
+		return 0, err
+	}
 
+	userID, err := strconv.ParseUint(claims["user_id"].(string), 10, 64)
+
+	return userID, nil
+}
 func (api *ConsumerAPI) GetConsumer(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	requestVariables := mux.Vars(r)
 	id, _ := strconv.Atoi(requestVariables["id"])
 
-	consumer, err := api.ss.GetConsumer(id)
+	consumer, err := api.ss.GetConsumer(int(id))
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	WriteEntityAndHeader(&w, consumer)
+}
+
+func (api *ConsumerAPI) GetCart(w http.ResponseWriter, r *http.Request) {
+	requestVariables := mux.Vars(r)
+	count, _ := strconv.Atoi(requestVariables["count"])
+	offset, _ := strconv.Atoi(requestVariables["offset"])
+	id, _ := strconv.Atoi(requestVariables["id"])
+
+	cart, err := api.ss.GetCart(id, count, offset)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 	enableCors(&w)
-	WriteEntityAndHeader(&w, consumer)
+	WriteEntityAndHeader(&w, cart)
 }
 
 func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
@@ -141,12 +171,12 @@ func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
 		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
 		return
 	}
-	enableCorsForCons(&w)
+	api.CORS(w, r)
 	WriteEntityAndHeader(&w, consumerResult)
 }
 
 func (api *ConsumerAPI) UpdateConsumer(w http.ResponseWriter, r *http.Request) {
-	enableCorsForCons(&w)
+	api.CORS(w, r)
 
 	dec := json.NewDecoder(r.Body)
 	var reqConsumer model.Consumer
@@ -223,12 +253,11 @@ func WriteEntityAndHeader(w *http.ResponseWriter, entity interface{}) {
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-}
-
-func enableCorsForCons(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, Access-Control-Allow-Origin")
+}
+func (api *ConsumerAPI) CORS(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 }
 
 func (api *ConsumerAPI) Healthcheck(w http.ResponseWriter, r *http.Request) {
@@ -242,7 +271,7 @@ func (api *ConsumerAPI) Healthcheck(w http.ResponseWriter, r *http.Request) {
 func WriteErrorEntityAndHeader(w *http.ResponseWriter, errorEntity error, statusCode int) {
 	b, err := json.Marshal(errorEntity)
 	writer := *w
-	enableCorsForCons(w)
+	enableCors(w)
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)
 		return

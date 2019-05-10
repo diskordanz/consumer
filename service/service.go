@@ -7,6 +7,7 @@ import (
 	lHandler "github.com/diskordanz/consumer/pkg/location/handler"
 	oHandler "github.com/diskordanz/consumer/pkg/order/handler"
 	pHandler "github.com/diskordanz/consumer/pkg/product/handler"
+
 	"github.com/diskordanz/consumer/service/model"
 )
 
@@ -28,6 +29,7 @@ type Service interface {
 	GetConsumer(int) (model.Consumer, error)
 	CreateConsumer(model.Consumer) (model.Consumer, error)
 	UpdateConsumer(model.Consumer) (model.Consumer, error)
+	GetCart(id, count, offset int) ([]model.CartItem, error)
 
 	Healthcheck() error
 }

@@ -1,7 +1,7 @@
 package model
 
 type Order struct {
-	ID         uint64        `db:"id"`
+	ID         uint64        `db:"id,omitempty"`
 	ConsumerID uint64        `db:"consumer_id"`
 	Products   map[int64]int `db:"products"`
 	Date       string        `db:"date"`

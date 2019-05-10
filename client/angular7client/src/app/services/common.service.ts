@@ -73,10 +73,16 @@ export class CommonService {
            .get(`${this.uri}/orders/${id}`);
   }
 
-  getProfile() {
+  getProfile(id : number) {
     return this
            .http
-           .get(`${this.uri}/profile`);
+           .get(`${this.uri}/consumers/${id}`);
+  }
+
+  getCart(id : number) {
+    return this
+           .http
+           .get(`${this.uri}/consumers/${id}/cart?count=10&offset=0`);
   }
 
   getProduct(id: number) {
@@ -85,20 +91,12 @@ export class CommonService {
            .get(`${this.uri}/products/${id}`);
   }
 
-  getConsumerById(id: number): Observable<Consumer> {
-    return this.http.get<Consumer>(`${this.uri}/consumers/${id}`);
+  updateConsumer(user: Consumer): Observable<Consumer> {
+    return this.http.put<Consumer>(`${this.uri}/consumers/${user.id}`, Consumer);
   }
 
-  getAuthorizedConsumer(): Observable<Consumer> {
-    return this.http.get<Consumer>(`${this.uri}/consumersprofile`);
-  }
-
-  addConsumer(Consumer: Consumer): Observable<Consumer> {
-    return this.http.post<Consumer>(`${this.uri}/consumers/add`, Consumer);
-  }
-
-  updateConsumer(Consumer: Consumer): Observable<Consumer> {
-    return this.http.put<Consumer>(`${this.uri}/consumers/${Consumer.id}`, Consumer);
+  createConsumer(user : Consumer): Observable<Consumer>{    
+    return this.http.post<Consumer>(`${this.uri}/consumers`, user);
   }
 
 }

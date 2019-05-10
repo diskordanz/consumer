@@ -1,3 +1,27 @@
-<p>
-  registration works!
-</p>
+<h2>Create user</h2>
+
+<div>
+    <label> First Name
+      <input [(ngModel)]="user.first_name" placeholder=""/>
+  </label>
+</div>
+
+<div>
+  <label> Last name
+    <input [(ngModel)]="user.last_name" placeholder=""/>
+</label>
+</div>
+
+<div>
+  <label> Login
+    <input [(ngModel)]="user.login" placeholder=""/>
+</label>
+</div>
+ 
+<div>
+  <label> Password
+    <input [(ngModel)]="user.password" placeholder=""/>
+</label>
+</div>
+
+<button (click)="createUser()">Create!</button>

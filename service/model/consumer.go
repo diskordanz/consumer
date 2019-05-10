@@ -2,19 +2,48 @@ package model
 
 import (
 	pkgConsumerModel "github.com/diskordanz/consumer/pkg/consumer/model"
+	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
 )
 
 type Consumer struct {
-	ID          uint64        `json:"id"`
-	FirstName   string        `json:"first_name"`
-	LastName    string        `json:"last_name"`
-	PhoneNumber string        `json:"phone_number"`
-	City        string        `json:"city"`
-	Address     string        `json:"address"`
-	Login       string        `json:"login"`
-	Mail        string        `json:"mail"`
-	Password    string        `json:"password"`
-	Cart        map[int64]int `json:"cart"`
+	ID          uint64 `json:"id"`
+	FirstName   string `json:"first_name"`
+	LastName    string `json:"last_name"`
+	PhoneNumber string `json:"phone_number"`
+	City        string `json:"city"`
+	Address     string `json:"address"`
+	Login       string `json:"login"`
+	Mail        string `json:"mail"`
+	Password    string `json:"password"`
+}
+
+type CartItem struct {
+	ID         uint64  `json:"id"`
+	ConsumerID uint64  `json:"consumer_id"`
+	Product    Product `json:"product"`
+	Count      uint    `json:"count"`
+}
+
+func MapToCart(originList []pkgConsumerModel.CartItem, originProducts []pkgProductModel.Product) []CartItem {
+	resultList := make([]CartItem, len(originList), len(originList))
+	for i, v := range originList {
+		resultList[i] = MapToCartItem(v, originProducts[i])
+	}
+	return resultList
+}
+
+func MapToCartItem(originItemCart pkgConsumerModel.CartItem, originProduct pkgProductModel.Product) CartItem {
+	return CartItem{
+		ID:         originItemCart.ID,
+		ConsumerID: originItemCart.ConsumerID,
+		Product: Product{
+			ID:    originItemCart.ProductID,
+			Name:  originProduct.Name,
+			Image: originProduct.Image,
+			Price: originProduct.Price,
+		},
+		Count: originItemCart.Count,
+	}
 }
 
 func MapToConsumer(originConsumer pkgConsumerModel.Consumer) Consumer {
@@ -28,7 +57,6 @@ func MapToConsumer(originConsumer pkgConsumerModel.Consumer) Consumer {
 		Login:       originConsumer.Login,
 		Mail:        originConsumer.Mail,
 		Password:    originConsumer.Password,
-		Cart:        originConsumer.Cart,
 	}
 }
 
@@ -43,7 +71,6 @@ func MapToConsumerDB(originConsumer Consumer) pkgConsumerModel.Consumer {
 		Login:       originConsumer.Login,
 		Mail:        originConsumer.Mail,
 		Password:    originConsumer.Password,
-		Cart:        originConsumer.Cart,
 	}
 }
 

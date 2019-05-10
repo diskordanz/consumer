@@ -28,9 +28,12 @@
             <i style="font-size: 26px; color: white;" class="far fa-user"></i>
         </button>
             <div class="dropdown-menu dropdown-menu-lg-right" style="margin-right: 5%;">
-              <a routerLink="login" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Вход | Регистрация</a>
-              <a routerLink="profile" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Профиль</a>
-              <a routerLink="orders" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Мои заказы</a>
+              <a *ngIf="notLogged()" routerLink="login" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Вход | Регистрация</a>
+
+              <a *ngIf="isLogged()"routerLink="profile" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Профиль</a>
+              <a *ngIf="isLogged()"routerLink="orders" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Мои заказы</a>
+              <a *ngIf="isLogged()" (click)="logout()" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Выход</a>
+
             </div>
           </li>   
         <li class="nav-item">

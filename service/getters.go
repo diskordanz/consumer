@@ -3,6 +3,8 @@ package service
 import (
 	"errors"
 
+	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
+
 	"github.com/diskordanz/consumer/service/model"
 )
 
@@ -114,6 +116,25 @@ func (s ConsumerService) GetConsumer(id int) (model.Consumer, error) {
 	}
 	resultConsumer := model.MapToConsumer(consumer)
 	return resultConsumer, nil
+}
+
+func (s ConsumerService) GetCart(id, count, offset int) ([]model.CartItem, error) {
+	cart, err := s.uh.GetCart(id, count, offset)
+	if err != nil {
+		return nil, err
+	}
+	var products []pkgProductModel.Product
+
+	for _, k := range cart {
+		product, err := s.ph.GetProductById(int(k.ProductID))
+		if err != nil {
+			return nil, err
+		}
+		products = append(products, product)
+	}
+
+	result := model.MapToCart(cart, products)
+	return result, nil
 }
 
 func (s ConsumerService) CreateConsumer(consumer model.Consumer) (model.Consumer, error) {

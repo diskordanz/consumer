@@ -1,32 +1,14 @@
-<!--<div *ngIf="isLoggedIn(); else loggedOut">
-  <h1>
-     {{ login.loggedIn }}
-  </h1>
-  <div>
-    <a routerLink="/profile" routerLinkActive="active"> {{ login.viewProfile }}</a>
-  </div>
+
+<div>
+  <label>
+      <input [(ngModel)]="user.login" placeholder="login"/>
+  </label>
 </div>
-<ng-template #loggedOut>
-  <h1> {{ login.login }}</h1>
-  <form [formGroup]="loginForm" novalidate>
-    <label>
-      name
-      <input type="text" formControlName="name">
-    </label>
 
+<div>
+  <label>
+      <input [(ngModel)]="user.password" placeholder="password"/>
+  </label>
+</div>
 
-    <label>
-      password
-      <input type="password" formControlName="password">
-    </label>
-
-    <label>
-      <button (click)="onLogin()">LOG IN</button>
-    </label>
-
-    <div>
-      <a routerLink="/forgot" routerLinkActive="active"> {{ login.forgot }}</a>
-    </div>
-  </form>
-</ng-template>-->
-<div>it works</div>
+<button (click)="onLogin()">Log in</button>

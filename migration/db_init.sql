@@ -78,6 +78,15 @@ CREATE TABLE order_items(
   FOREIGN KEY(product_id) REFERENCES products(id)
 );
 
+CREATE TABLE cart_items(
+  id SERIAL PRIMARY KEY, 
+  consumer_id INT NOT NULL,
+  product_id INT NOT NULL,
+  count INT, 
+  FOREIGN KEY(consumer_id) REFERENCES consumers(id),
+  FOREIGN KEY(product_id) REFERENCES products(id)
+);
+
 INSERT INTO categories (name)
 VALUES 
       ('Все категории'),
@@ -122,3 +131,10 @@ VALUES
       (11, 'Se5crect', 'Eto Secrect', 'r', 1, 2, 0, 1.0),
       (12, 'Evi6lMag', 'Eto EvilMag', 'r', 1, 2, 0, 1.0),
       (13, 'Mand5arin', 'Eto Mandarin', 'r', 1, 2, 0, 1.0);
+
+INSERT INTO cart_items (id, consumer_id, product_id, count)
+VALUES
+      (1, 1, 1, 10),
+      (2, 1, 2, 2),
+      (3, 1, 3, 2),
+      (4, 1, 4, 2);
