@@ -37,6 +37,10 @@ func (h *ConsumerHandler) UpdateCartItem(item model.CartItem) (model.CartItem, e
 	return h.us.UpdateCartItem(item)
 }
 
+func (h *ConsumerHandler) DeleteCartItem(item model.CartItem) error {
+	return h.us.DeleteCartItem(item)
+}
+
 func (h *ConsumerHandler) GetCartItem(id, product_id int) (model.CartItem, error) {
 	return h.us.GetCartItem(id, product_id)
 }

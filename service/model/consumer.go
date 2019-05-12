@@ -2,6 +2,7 @@ package model
 
 import (
 	pkgConsumerModel "github.com/diskordanz/consumer/pkg/consumer/model"
+	pkgFranchiseModel "github.com/diskordanz/consumer/pkg/franchise/model"
 	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
 )
 
@@ -24,12 +25,36 @@ type CartItem struct {
 	Count      uint    `json:"count"`
 }
 
-func MapToCart(originList []pkgConsumerModel.CartItem, originProducts []pkgProductModel.Product) []CartItem {
-	resultList := make([]CartItem, len(originList), len(originList))
+type CartItemsByFranchise struct {
+	FranchiseID   uint64     `json:"franchise_id"`
+	FranchiseName string     `json:"franchise_name"`
+	CartItems     []CartItem `json:"cart_items"`
+	Total         float32    `json:"total"`
+}
+
+func MapToCart(originList []pkgConsumerModel.CartItem, originProducts []pkgProductModel.Product, franchises []pkgFranchiseModel.Franchise) []CartItemsByFranchise {
+	var franchiseList []CartItemsByFranchise
 	for i, v := range originList {
-		resultList[i] = MapToCartItem(v, originProducts[i])
+		franchiseList = add(franchiseList, MapToCartItem(v, originProducts[i]), franchises[i])
 	}
-	return resultList
+	return franchiseList
+}
+
+func add(cart []CartItemsByFranchise, item CartItem, franchise pkgFranchiseModel.Franchise) []CartItemsByFranchise {
+	for i, k := range cart {
+		if k.FranchiseID == franchise.ID {
+			cart[i].CartItems = append(k.CartItems, item)
+			cart[i].Total += item.Product.Price * float32(item.Count)
+			return cart
+		}
+	}
+	cart = append(cart, CartItemsByFranchise{
+		FranchiseID:   franchise.ID,
+		FranchiseName: franchise.Name,
+		CartItems:     []CartItem{item},
+		Total:         item.Product.Price * float32(item.Count),
+	})
+	return cart
 }
 
 func MapToCartItem(originItemCart pkgConsumerModel.CartItem, originProduct pkgProductModel.Product) CartItem {

@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 
+	pkgFranchiseModel "github.com/diskordanz/consumer/pkg/franchise/model"
 	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
 
 	"github.com/diskordanz/consumer/service/model"
@@ -69,13 +70,47 @@ func (s ConsumerService) ListOrders(id, count, offset int) ([]model.Order, error
 	return result, nil
 }
 
-func (s ConsumerService) GetOrder(id int) (model.Order, error) {
+func (s ConsumerService) GetOrder(id int) (model.OrderWithItems, error) {
+	items, err := s.oh.GetOrderItems(id)
+	if err != nil {
+		return model.OrderWithItems{}, err
+	}
 	order, err := s.oh.GetOrder(id)
+	if err != nil {
+		return model.OrderWithItems{}, err
+	}
+
+	var products []pkgProductModel.Product
+	for _, k := range items {
+		product, err := s.ph.GetProductById(int(k.ProductID))
+		if err != nil {
+			return model.OrderWithItems{}, err
+		}
+		products = append(products, product)
+	}
+
+	resultOrder := model.MapToOrderWithItems(order, items, products)
+
+	return resultOrder, nil
+}
+
+func (s ConsumerService) CreateOrderItem(item model.OrderItem) (model.OrderItem, error) {
+	dbItem := model.MapToOrderItemDB(item)
+	_, err := s.oh.CreateOrderItem(dbItem)
+	if err != nil {
+		return model.OrderItem{}, err
+	}
+	return item, nil
+}
+
+func (s ConsumerService) CreateOrder(item model.Order) (model.Order, error) {
+	dbItem := model.MapToOrderDB(item)
+	order, err := s.oh.CreateOrder(dbItem)
 	if err != nil {
 		return model.Order{}, err
 	}
-	resultOrder := model.MapToOrder(order)
-	return resultOrder, nil
+	item.ID = order.ID
+	return item, nil
 }
 
 /////////////////////////////////////////////////////////////
@@ -118,29 +153,36 @@ func (s ConsumerService) GetConsumer(id int) (model.Consumer, error) {
 	return resultConsumer, nil
 }
 
-func (s ConsumerService) GetCart(id, count, offset int) ([]model.CartItem, error) {
+func (s ConsumerService) GetCart(id, count, offset int) ([]model.CartItemsByFranchise, error) {
 	cart, err := s.uh.GetCart(id, count, offset)
 	if err != nil {
 		return nil, err
 	}
 	var products []pkgProductModel.Product
-
+	var franchises []pkgFranchiseModel.Franchise
 	for _, k := range cart {
 		product, err := s.ph.GetProductById(int(k.ProductID))
+		franchise, err := s.fh.GetFranchise(int(product.FranchiseID))
 		if err != nil {
 			return nil, err
 		}
 		products = append(products, product)
+		franchises = append(franchises, franchise)
 	}
 
-	result := model.MapToCart(cart, products)
+	result := model.MapToCart(cart, products, franchises)
 	return result, nil
 }
 
 func (s ConsumerService) GetCartItem(id, productID int) (model.CartItem, error) {
 	cart, err := s.uh.GetCartItem(id, productID)
 	if err != nil {
-		return model.CartItem{}, err
+		return model.CartItem{
+			ID:         0,
+			ConsumerID: uint64(id),
+			Product:    model.Product{ID: uint64(productID)},
+			Count:      1,
+		}, err
 	}
 
 	result := model.MapToCartItem(cart, pkgProductModel.Product{})
@@ -163,6 +205,15 @@ func (s ConsumerService) UpdateCartItem(item model.CartItem) (model.CartItem, er
 		return model.CartItem{}, err
 	}
 	return item, nil
+}
+
+func (s ConsumerService) DeleteCartItem(item model.CartItem) error {
+	dbItem := model.MapToCartItemDB(item)
+	err := s.uh.DeleteCartItem(dbItem)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (s ConsumerService) CreateConsumer(consumer model.Consumer) (model.Consumer, error) {

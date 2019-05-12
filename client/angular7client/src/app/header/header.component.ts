@@ -28,6 +28,10 @@ export class HeaderComponent implements OnInit {
     return localStorage.getItem('token') == null
   }
   ngOnInit() {
+    this.selectedCategory ={
+      id: 0,
+      name: 'All categories'};
+      
     this.s
       .listCategories()
       .subscribe((data: Category[]) => {

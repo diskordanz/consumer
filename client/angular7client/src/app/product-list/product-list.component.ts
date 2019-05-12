@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../services/common.service';
 import { Product, CartItem } from '../models';
 import { ActivatedRoute } from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -16,16 +17,11 @@ export class ProductListComponent implements OnInit {
   state$: Observable<object>; 
   products: Product[];
 
-  item: CartItem = {
-    id: 0,
-    id_consumer: 0,
-    product: null,
-    count: 1,
-  };
-
+  item: CartItem;
   item2: CartItem;
+  subscription: Subscription;
 
-  constructor(public router: ActivatedRoute, private s: CommonService, private auth: AuthService) { }
+  constructor(private http: HttpClient, public router: ActivatedRoute, private s: CommonService, private auth: AuthService) { }
  
   ngOnInit() {
     this.state$ = this.router.paramMap
@@ -51,27 +47,61 @@ export class ProductListComponent implements OnInit {
       this.products = data;});
   }
 }
+
+
   addToCart(product: Product){
-    
-    this.item.id_consumer = this.auth.getUserID(localStorage.getItem('token')); 
-    this.item.product=product;
 
+    this.item = {
+        id: 0,
+        consumer_id: this.auth.getUserID(localStorage.getItem('token')),
+        product: product,
+        count: 1,
+      };
 
-    this.s.getCartItem(this.item).subscribe((data :CartItem)=> {
-      this.item2 = data;})
-
-    if(this.item2){
-        this.item2.count++;
-        this.s.updateCartItem(this.item2).subscribe(item => {
-          this.item2 = item;
+      this.s.getCartItem(this.item).subscribe((data: CartItem) => {
+        this.item2 = data;
+        console.log(this.item2);
+      
+      if(this.item2.id == 0){
+        this.s.createCartItem(this.item).subscribe((data :CartItem) => {
+          this.item = data;
+          console.log("create");
         });
-        console.log(this.item2)
-        console.log("update")
-      }    
-    else {
-      this.s.createCartItem(this.item).subscribe(item => {
-      this.item = item;
+      } 
+      else {
+        this.item2.count++;
+        this.s.updateCartItem(this.item2).subscribe((data :CartItem) => {
+          this.item2 = data;
+        console.log("update"); 
+      });
+    }
     });
+      
+
+     
+      
+      
+      /*subscribe((data :CartItem)=> {
+        this.item = data;
+        this.item.count++;
+        this.s.updateCartItem(this.item).subscribe((data :CartItem) => {
+          this.item = data});
+        console.log("update"); 
+        console.log(this.item);
+        this.onDestroy()
+      });
+
+      console.log(this.item);
+
+      if(this.subscription == null){
+        this.s.createCartItem(this.item).subscribe((data :CartItem) => {
+        this.item = data;}).unsubscribe();
+        console.log("create");
+      }*/
+
+  } 
+  onDestroy(){
+    this.subscription.unsubscribe();
+    this.subscription = null; 
   }
-}
 }

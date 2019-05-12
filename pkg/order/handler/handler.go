@@ -20,3 +20,14 @@ func (h *OrderHandler) ListOrders(id, count, offset int) ([]model.Order, error) 
 func (h *OrderHandler) GetOrder(id int) (model.Order, error) {
 	return h.os.Get(id)
 }
+func (h *OrderHandler) GetOrderItems(id int) ([]model.OrderItem, error) {
+	return h.os.ListItems(id)
+}
+
+func (h *OrderHandler) CreateOrder(order model.Order) (model.Order, error) {
+	return h.os.CreateOrder(order)
+}
+
+func (h *OrderHandler) CreateOrderItem(item model.OrderItem) (model.OrderItem, error) {
+	return h.os.CreateOrderItem(item)
+}

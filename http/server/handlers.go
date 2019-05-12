@@ -163,28 +163,22 @@ func (api *ConsumerAPI) GetCartItem(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(requestVariables["id"])
 	product_id, _ := strconv.Atoi(requestVariables["product_id"])
 
-	item, err := api.ss.GetCartItem(id, product_id)
+	item, _ := api.ss.GetCartItem(id, product_id)
 
-	if err != nil {
-		return
-	}
-	fmt.Println(item)
 	WriteEntityAndHeader(&w, item)
 }
 
 func (api *ConsumerAPI) CreateCartItem(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	requestVariables := mux.Vars(r)
-	id, _ := strconv.Atoi(requestVariables["id"])
-
 	var reqCartItem model.CartItem
 	decoder := json.NewDecoder(r.Body)
+
 	if err := decoder.Decode(&reqCartItem); err != nil {
 		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
 		return
 	}
 	defer r.Body.Close()
-	reqCartItem.ConsumerID = uint64(id)
+
 	result, err := api.ss.CreateCartItem(reqCartItem)
 	if err != nil {
 		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
@@ -212,8 +206,65 @@ func (api *ConsumerAPI) UpdateCartItem(w http.ResponseWriter, r *http.Request) {
 	WriteEntityAndHeader(&w, result)
 }
 
-func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
+func (api *ConsumerAPI) DeleteCartItem(w http.ResponseWriter, r *http.Request) {
+	requestVariables := mux.Vars(r)
+	enableCors(&w)
+	id, _ := strconv.Atoi(requestVariables["id"])
+	var reqItem model.CartItem
+	reqItem.ID = uint64(id)
 
+	err := api.ss.DeleteCartItem(reqItem)
+
+	if err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (api *ConsumerAPI) CreateOrder(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	var reqOrder model.Order
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&reqOrder); err != nil {
+		fmt.Println(reqOrder.Status)
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+
+	orderResult, err := api.ss.CreateOrder(reqOrder)
+
+	if err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+
+	WriteEntityAndHeader(&w, orderResult)
+}
+
+func (api *ConsumerAPI) CreateOrderItem(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	var reqOrder model.OrderItem
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&reqOrder); err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+	defer r.Body.Close()
+
+	orderResult, err := api.ss.CreateOrderItem(reqOrder)
+
+	if err != nil {
+		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
+		return
+	}
+
+	WriteEntityAndHeader(&w, orderResult)
+}
+func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	var reqConsumer model.Consumer
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&reqConsumer); err != nil {
@@ -228,13 +279,11 @@ func (api *ConsumerAPI) CreateConsumer(w http.ResponseWriter, r *http.Request) {
 		WriteErrorEntityAndHeader(&w, err, http.StatusBadRequest)
 		return
 	}
-	api.CORS(w, r)
 	WriteEntityAndHeader(&w, consumerResult)
 }
 
 func (api *ConsumerAPI) UpdateConsumer(w http.ResponseWriter, r *http.Request) {
-	api.CORS(w, r)
-
+	enableCors(&w)
 	dec := json.NewDecoder(r.Body)
 	var reqConsumer model.Consumer
 	err := dec.Decode(&reqConsumer)
@@ -252,23 +301,8 @@ func (api *ConsumerAPI) UpdateConsumer(w http.ResponseWriter, r *http.Request) {
 	WriteEntityAndHeader(&w, consumerResult)
 }
 
-/*
-func (api *ConsumerAPI) GetCart(w http.ResponseWriter, r *http.Request) {
-	requestVariables := mux.Vars(r)
-	count, _ := strconv.Atoi(requestVariables["count"])
-	offset, _ := strconv.Atoi(requestVariables["offset"])
-
-	cart, err := api.ss.GetCart(id, count, offset)
-
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-	enableCors(&w)
-	WriteEntityAndHeader(&w, cart)
-}*/
-
 func (api *ConsumerAPI) ListOrders(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	requestVariables := mux.Vars(r)
 	count, _ := strconv.Atoi(requestVariables["count"])
 	offset, _ := strconv.Atoi(requestVariables["offset"])
@@ -280,13 +314,14 @@ func (api *ConsumerAPI) ListOrders(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	enableCors(&w)
 	WriteEntityAndHeader(&w, orders)
 }
 
 func (api *ConsumerAPI) GetOrder(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	requestVariables := mux.Vars(r)
-	orderID, _ := strconv.Atoi(requestVariables["order_id"])
+	orderID, _ := strconv.Atoi(requestVariables["id"])
 
 	order, err := api.ss.GetOrder(orderID)
 
@@ -294,7 +329,6 @@ func (api *ConsumerAPI) GetOrder(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	enableCors(&w)
 	WriteEntityAndHeader(&w, order)
 }
 

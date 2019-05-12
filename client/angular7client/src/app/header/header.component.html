@@ -21,6 +21,14 @@
         </div>
 
       </li>
+
+      <li class="nav-item">
+        <a style="color:white; border-color:white; display:flex; align-items:center; font-family:'Courier New', Courier, monospace; margin-left: 20px; font-size: 17px;" routerLink="franchises" class="nav-link" routerLinkActive="active">Franchises</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="products" class="nav-link" routerLinkActive="active" style="color:white; border-color:white; display:flex; font-size: 17px; align-items:center; font-family:'Courier New', Courier, monospace;">Products</a>
+      </li>
+
     </ul>
     <ul class="navbar-nav" style="display:flex; flex-direction:row; justify-content: flex-end;">
         <li class="nav-item">
@@ -28,11 +36,11 @@
             <i style="font-size: 26px; color: white;" class="far fa-user"></i>
         </button>
             <div class="dropdown-menu dropdown-menu-lg-right" style="margin-right: 5%;">
-              <a *ngIf="notLogged()" routerLink="login" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Вход | Регистрация</a>
+              <div *ngIf="notLogged()" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; "><a routerLink="login">Sign In</a> | <a routerLink="registration">Registration</a></div>
 
-              <a *ngIf="isLogged()"routerLink="profile" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Профиль</a>
-              <a *ngIf="isLogged()"routerLink="orders" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Мои заказы</a>
-              <a *ngIf="isLogged()" (click)="logout()" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Выход</a>
+              <a *ngIf="isLogged()"routerLink="profile" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Profile</a>
+              <a *ngIf="isLogged()"routerLink="orders" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">My Orders</a>
+              <a *ngIf="isLogged()" (click)="logout()" class="dropdown-item" style="padding:5px 10px; font-family: 'Courier New', Courier, monospace; cursor: pointer; ">Sign Out</a>
 
             </div>
           </li>   

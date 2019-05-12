@@ -1,15 +1,22 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <td>User</td>
-      <td>Products</td>
+      <td>Order</td>
+      <td>FranchiseID</td>
+      <td>Created</td>
+      <td>Total</td>
+      <td>Status</td>
+
     </tr>
   </thead>
 
   <tbody>
-      <tr *ngFor="let order of orders">
-          <td>{{ order.user_id  }}</td>
-          <td>{{ order.products }}</td>
+      <tr *ngFor="let order of orders" [routerLink]="[order.id]">
+          <td>{{ order.id }}</td>
+          <td>{{ order.franchise_id }}</td>
+          <td>{{ order.time }}</td>
+          <td>{{ order.total }}</td>
+          <td>{{ order.status }}</td>
       </tr>
   </tbody>
 </table>

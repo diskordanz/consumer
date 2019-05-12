@@ -18,3 +18,5 @@ type CartItem struct {
 	ProductID  uint64 `db:"product_id"`
 	Count      uint   `db:"count"`
 }
+
+

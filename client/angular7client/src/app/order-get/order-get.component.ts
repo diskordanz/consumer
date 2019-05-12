@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../services/common.service';
-import { Order } from '../models';
-import { ActivatedRoute } from '@angular/router';
+import { OrderItemWithProduct, OrderItem, Order , OrderWithItems, OrderWithItemsAndProducts, Product} from '../models';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-get',
@@ -10,14 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class OrderGetComponent implements OnInit {
 
-  order: Order;
-
-  constructor(private route: ActivatedRoute, private s: CommonService) { }
+  order: OrderWithItemsAndProducts;
+  constructor(private route: ActivatedRoute, private s: CommonService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.s.getOrder(params['id']).subscribe((res: Order) => {
-        this.order = res;});
-    });
+      this.s.getOrder(params['id']).subscribe((res: OrderWithItemsAndProducts) => {
+        this.order = res});});
+  }
+
+  getProduct(id) {
+    this.router.navigateByUrl('/products/'+id)
   }
 }

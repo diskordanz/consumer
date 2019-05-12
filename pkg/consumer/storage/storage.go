@@ -12,4 +12,5 @@ type ConsumerStorage interface {
 	CreateCartItem(model.CartItem) (model.CartItem, error)
 	UpdateCartItem(model.CartItem) (model.CartItem, error)
 	GetCartItem(id, productID int) (model.CartItem, error)
+	DeleteCartItem(model.CartItem) error
 }

@@ -1,14 +1,15 @@
+<div class="form-signin" style="margin: 10% 25%">
+  <div class="text-center">
+    <a routerLink="../registration" class="h5 font-weight-normal" style="color:rgb(30, 159, 163) ;">First time with us? Sign up!</a>
+  </div>
 
-<div>
-  <label>
-      <input [(ngModel)]="user.login" placeholder="login"/>
-  </label>
+  <div class="form-label-group" style="margin: 15px 0;">
+    <input style="height:50px;" [(ngModel)]="user.login" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+  </div>
+
+  <div class="form-label-group" style="margin: 15px 0;">
+    <input style="height: 50px;" [(ngModel)]="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" style="margin: 20px 0;height: 50px; font-family: 'Courier New', Courier, monospace; background-color: black; border-color: black;" (click)="onLogin()">Sign in</button>
 </div>
-
-<div>
-  <label>
-      <input [(ngModel)]="user.password" placeholder="password"/>
-  </label>
-</div>
-
-<button (click)="onLogin()">Log in</button>

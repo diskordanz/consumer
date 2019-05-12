@@ -63,7 +63,7 @@ CREATE TABLE orders(
   id SERIAL PRIMARY KEY, 
   consumer_id INT NOT NULL,
   franchise_id INT NOT NULL,
-  time TIME,
+  time TIMESTAMP,
   total FLOAT,
   status VARCHAR(15),
   FOREIGN KEY(consumer_id) REFERENCES consumers(id),
@@ -75,7 +75,6 @@ CREATE TABLE order_items(
   order_id INT NOT NULL,
   product_id INT NOT NULL,
   count INT, 
-  subtotal FLOAT,
   FOREIGN KEY(order_id) REFERENCES orders(id),
   FOREIGN KEY(product_id) REFERENCES products(id)
 );
@@ -104,9 +103,9 @@ VALUES
       ('Товары для дачи'),
       ('Подарки, сувениры');
 
-INSERT INTO consumers (id, first_name, last_name, phone_number, city, address, login, mail, password)
+INSERT INTO consumers (first_name, last_name, phone_number, city, address, login, mail, password)
 VALUES
-      (1, 'Nadya', 'Barsukova', '9999999', 'Gomel', 'a/g', 'login', 'n@gmail.com','password');
+      ('Nadya', 'Barsukova', '9999999', 'Gomel', 'a/g', 'login', 'n@gmail.com','password');
 
 INSERT INTO franchises (id, country_id, name, description, image)
 VALUES 
@@ -122,21 +121,30 @@ INSERT INTO products (id, name, description, image, franchise_id, category_id, c
 VALUES 
       (1, 'Evroopt2', 'Eto evrik', 'r', 1, 2, 0, 1.0),
       (2, 'Kopeechka2', 'Eto kopeechka', 'r', 1, 2, 0, 1.0),
-      (3, 'Dobryk3', 'Eto dobryk', 'r', 1, 2, 0, 1.0),
-      (4, 'Monetoc3hka', 'Eto Monetochka', 'r', 1, 2, 0, 1.0),
-      (5, 'Bobryk3', 'Eto Bobryk', 'r', 1, 2, 0, 1.0),
-      (6, 'Kosmety4chka', 'Eto Kosmetychka', 'r', 1, 2, 0, 1.0),
-      (7, 'Game4sh', 'Eto Gamesh', 'r', 1, 2, 0, 1.0),
-      (8, 'Ugam4e', 'Eto Ugame', 'r', 1, 2, 0, 1.0),
-      (9, 'Many4Opt', 'Eto ManyOpt', 'r', 1, 2, 0, 1.0),
-      (10, 'A5pelsyn', 'Eto Apelsyn', 'r', 1, 2, 0, 1.0),
-      (11, 'Se5crect', 'Eto Secrect', 'r', 1, 2, 0, 1.0),
-      (12, 'Evi6lMag', 'Eto EvilMag', 'r', 1, 2, 0, 1.0),
-      (13, 'Mand5arin', 'Eto Mandarin', 'r', 1, 2, 0, 1.0);
+      (3, 'Dobryk3', 'Eto dobryk', 'r', 2, 3, 0, 1.0),
+      (4, 'Monetoc3hka', 'Eto Monetochka', 'r', 2, 3, 0, 1.0),
+      (5, 'Bobryk3', 'Eto Bobryk', 'r', 3, 4, 0, 1.0),
+      (6, 'Kosmety4chka', 'Eto Kosmetychka', 'r', 3, 4, 0, 1.0),
+      (7, 'Game4sh', 'Eto Gamesh', 'r', 4, 5, 0, 1.0),
+      (8, 'Ugam4e', 'Eto Ugame', 'r', 4, 5, 0, 1.0),
+      (9, 'Many4Opt', 'Eto ManyOpt', 'r', 5, 6, 0, 1.0),
+      (10, 'A5pelsyn', 'Eto Apelsyn', 'r', 5, 6, 0, 1.0),
+      (11, 'Se5crect', 'Eto Secrect', 'r', 6, 7, 0, 1.0),
+      (12, 'Evi6lMag', 'Eto EvilMag', 'r', 6, 7, 0, 1.0),
+      (13, 'Mand5arin', 'Eto Mandarin', 'r', 6, 8, 0, 1.0);
 
-INSERT INTO cart_items (id, consumer_id, product_id, count)
+INSERT INTO cart_items (consumer_id, product_id, count)
 VALUES
-      (1, 1, 1, 10),
-      (2, 1, 2, 2),
-      (3, 1, 3, 2),
-      (4, 1, 4, 2);
+      (1, 1, 1),
+      (1, 2, 2),
+      (1, 3, 3),
+      (1, 4, 4);
+
+INSERT INTO orders (consumer_id, franchise_id, time, total, status)
+VALUES
+      (1, 1, '2004-10-19 10:23:54', 10.0, 'TEST');
+
+INSERT INTO order_items (order_id, product_id, count)
+VALUES
+      (1, 1, 1),
+      (1, 2, 2);

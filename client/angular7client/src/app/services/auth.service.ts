@@ -21,8 +21,8 @@ export class AuthService {
     console.log(url)    
     this.http.post<any>(url, user, {observe: 'response'}).subscribe(resp =>{  
       localStorage.setItem('token', resp.headers.get('Token'));
+      this.router.navigateByUrl('/profile')
     }); 
-    this.router.navigate(["profile"])     
   }
   
   isLogged():boolean{
@@ -42,11 +42,11 @@ export class AuthService {
     date.setUTCSeconds(decoded.exp);
     return date;
   }
-  getUserID(token : string): number{
+  getUserID(token : string):number{
     const decoded = jwt_decode(token);
     var userId= decoded['user_id']
     if(userId === undefined) return null;    
-    return userId;
+    return parseInt(userId);
   }
 
   refresh():Observable<boolean>{

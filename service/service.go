@@ -23,16 +23,20 @@ type Service interface {
 	ListProducts(name string, count, offset int) ([]model.Product, error)
 	ListProductsByCategory(id uint64, name string, count, offset int) ([]model.Product, error)
 
-	GetOrder(id int) (model.Order, error)
+	GetOrder(id int) (model.OrderWithItems, error)
 	ListOrders(id, count, offset int) ([]model.Order, error)
+	CreateOrder(item model.Order) (model.Order, error)
+	CreateOrderItem(item model.OrderItem) (model.OrderItem, error)
 
 	GetConsumer(int) (model.Consumer, error)
 	CreateConsumer(model.Consumer) (model.Consumer, error)
 	UpdateConsumer(model.Consumer) (model.Consumer, error)
-	GetCart(id, count, offset int) ([]model.CartItem, error)
+	GetCart(id, count, offset int) ([]model.CartItemsByFranchise, error)
 	GetCartItem(id, productID int) (model.CartItem, error)
 	CreateCartItem(model.CartItem) (model.CartItem, error)
 	UpdateCartItem(model.CartItem) (model.CartItem, error)
+	DeleteCartItem(model.CartItem) error
+
 	Healthcheck() error
 }
 

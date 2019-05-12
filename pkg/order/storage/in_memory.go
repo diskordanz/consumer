@@ -13,7 +13,7 @@ type InMemoryOrderStorage struct {
 
 func NewInMemoryOrderStorage() InMemoryOrderStorage {
 	db := []model.Order{
-		model.Order{ID: 1, ConsumerID: 1, Products: map[int64]int{1: 1, 2: 1, 3: 10}, Date: "5/5/2019", Total: 0, Status: ""},
+		model.Order{ID: 1, ConsumerID: 1, Total: 0, Status: ""},
 	}
 	return InMemoryOrderStorage{db: db}
 }

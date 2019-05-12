@@ -1,3 +1,6 @@
+import { Time } from '@angular/common';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
+
 export class Location {
   id: number;
   franchise_id: number;
@@ -32,11 +35,35 @@ export class Product{
 
 export class Order{
   id: number;
-  user_id: number;
-  products: Map<number, number>;
-  date: Date;
+  consumer_id: number;
+  franchise_id: number;
+  time: Date;
   total: number;
   status: string;
+}
+
+export class OrderItem{
+  id: number;
+  order_id: number;
+  product_id: number;
+  count: number;
+}
+
+export class OrderItemWithProduct{
+  id: number;
+  order_id: number;
+  product: Product;
+  count: number;
+}
+
+export class OrderWithItems{
+  order: Order;
+  items: Array<OrderItem>;
+}
+
+export class OrderWithItemsAndProducts{
+  order: Order;
+  items: Array<OrderItemWithProduct>;
 }
 
 export class Consumer{
@@ -60,7 +87,14 @@ export class LoginUser {
 
 export class CartItem {
   id: number;
-  id_consumer: number;
+  consumer_id: number;
   product: Product;
   count: number;
+}
+
+export class CartItemByFranchise {
+  franchise_id: number;
+  franchise_name: string;
+  cart_items: Array<CartItem>;
+  total: number;
 }

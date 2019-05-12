@@ -37,15 +37,23 @@ func (api *ConsumerAPI) AssignRoutes() {
 	api.router.HandleFunc("/api/consumers/{id}/cart/{item_id}", api.UpdateCartItem).Methods("PUT")
 	api.router.HandleFunc("/api/consumers/{id}/cart/{item_id}", api.CORS).Methods("OPTIONS")
 	api.router.HandleFunc("/api/consumers/{id}/cart", api.GetCartItem).Methods("GET").Queries("product_id", "{product_id}")
+	api.router.HandleFunc("/api/cart/{id}", api.CORS).Methods("OPTIONS")
+	api.router.HandleFunc("/api/cart/{id}", api.DeleteCartItem).Methods("DELETE")
 
 	api.router.HandleFunc("/api/consumers/{id}", api.GetConsumer).Methods("GET")
 	api.router.HandleFunc("/api/consumers", api.CreateConsumer).Methods("POST")
 	api.router.HandleFunc("/api/consumers", api.CORS).Methods("OPTIONS")
 
 	api.router.HandleFunc("/api/consumers/{id}", api.UpdateConsumer).Methods("PUT")
+	api.router.HandleFunc("/api/consumers/{id}", api.CORS).Methods("OPTIONS")
+
 	//orders
 	api.router.HandleFunc("/api/consumers/{id}/orders", api.ListOrders).Methods("GET").Queries("count", "{count:[0-9]+}", "offset", "{offset:[0-9]+}")
-	api.router.HandleFunc("/api/consumers/{consumer_id}/orders/{order_id}", api.GetOrder).Methods("GET")
+	api.router.HandleFunc("/api/orders/{id}", api.GetOrder).Methods("GET")
+	api.router.HandleFunc("/api/orders", api.CreateOrder).Methods("POST")
+	api.router.HandleFunc("/api/orders", api.CORS).Methods("OPTIONS")
+	api.router.HandleFunc("/api/orders/{id}", api.CreateOrderItem).Methods("POST")
+	api.router.HandleFunc("/api/orders/{id}", api.CORS).Methods("OPTIONS")
 	//healthcheck
 	api.router.HandleFunc("/api/healthcheck", api.Healthcheck).Methods("GET")
 }

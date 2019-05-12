@@ -92,3 +92,11 @@ func (s UpperConsumerStorage) GetCartItem(id, productID int) (model.CartItem, er
 	}
 	return item, nil
 }
+
+func (s UpperConsumerStorage) DeleteCartItem(item model.CartItem) error {
+	err := s.db.Collection(cartCollection).Find(db.Cond{"id": item.ID}).Delete()
+	if err != nil {
+		return err
+	}
+	return nil
+}
