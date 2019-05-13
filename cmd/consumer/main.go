@@ -2,8 +2,10 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/diskordanz/consumer/http/server"
+	"google.golang.org/grpc"
 
 	cHandler "github.com/diskordanz/consumer/pkg/category/handler"
 	uHandler "github.com/diskordanz/consumer/pkg/consumer/handler"
@@ -21,13 +23,14 @@ import (
 	lStorage "github.com/diskordanz/consumer/pkg/location/storage"
 	oStorage "github.com/diskordanz/consumer/pkg/order/storage"
 	pStorage "github.com/diskordanz/consumer/pkg/product/storage"
+	pb "github.com/iamnotjustice/web-metrics/pkg/api"
 )
 
 var dbSettings = postgresql.ConnectionURL{
-	Database: `platform`,
-	Host:     `localhost:5432`,
-	User:     `postgres`,
-	Password: `postgres`,
+	Database: os.Getenv("DB_NAME"),
+	Host:     os.Getenv("DB_HOST"),
+	User:     os.Getenv("DB_USERNAME"),
+	Password: os.Getenv("DB_PASSWORD"),
 }
 
 func main() {
@@ -54,8 +57,14 @@ func main() {
 	consumerHandler := uHandler.NewConsumerHandler(consumerStorage)
 
 	srv := service.NewConsumerService(franchiseHandler, locationHandler, categoryHandler, productHandler, orderHandler, consumerHandler)
+	conn, err := grpc.Dial(os.Getenv("METRICS_HOST"), grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("error dialing to client: %+v", err)
+	}
+	defer conn.Close()
+	metricsService := pb.NewMetricsServiceClient(conn)
 
-	api := server.NewAPI(&srv)
+	api := server.NewAPI(&srv, &metricsService)
 	api.AssignRoutes()
-	api.Run(":8080")
+	api.Run(os.Getenv("CONSUMER_HOST"))
 }

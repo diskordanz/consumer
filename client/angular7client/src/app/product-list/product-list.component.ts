@@ -31,18 +31,18 @@ export class ProductListComponent implements OnInit {
 
       if(window.history.state.category_id == 1){
 
-      this.s.listProducts(window.history.state.name)
+      this.s.listProducts(window.history.state.name, 20,0)
       .subscribe((data: Product[]) => {
         this.products = data;});
       }
       else {
-      this.s.listProductsByCategory(window.history.state.category_id, window.history.state.name)
+      this.s.listProductsByCategory(window.history.state.category_id, window.history.state.name, 20,0)
       .subscribe((data: Product[]) => {
         this.products = data;});
       } 
   }
   else{
-    this.s.listProducts("")
+    this.s.listProducts("", 20,0)
     .subscribe((data: Product[]) => {
       this.products = data;});
   }

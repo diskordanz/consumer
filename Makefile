@@ -17,7 +17,6 @@ down:
 clean:
 		docker rm db consumer
 build:	
-		go build -o ./cmd/consumer/consumer -i ./cmd/consumer
-		docker build -t db ./migration
-		docker build -t consumer ./cmd/consumer
-		rm ./cmd/consumer/consumer
+		go build -o ./cmd/consumer/web-consumer -i ./cmd/consumer
+		docker build -t web-consumer ./cmd/consumer
+		rm ./cmd/consumer/web-consumer

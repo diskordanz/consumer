@@ -11,7 +11,8 @@ type Location struct {
 	Locality     string `json:"inhabited_locality"`
 	Adress       string `json:"adress"`
 	OpeningHours string `json:"opening_hours"`
-	Type         string `json:"type"`
+	Latitude     string `json:"latitude"`
+	Longitude    string `json:"longitude"`
 }
 
 func MapToLocation(originLocation pkgLocationModel.Location) Location {
@@ -22,6 +23,8 @@ func MapToLocation(originLocation pkgLocationModel.Location) Location {
 		Locality:     originLocation.Locality,
 		Adress:       originLocation.Adress,
 		OpeningHours: originLocation.OpeningHours,
+		Latitude:     originLocation.Latitude,
+		Longitude:    originLocation.Longitude,
 	}
 }
 

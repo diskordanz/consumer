@@ -52,7 +52,7 @@ export class OrderItem{
 export class OrderItemWithProduct{
   id: number;
   order_id: number;
-  product: Product;
+  product: Product; 
   count: number;
 }
 

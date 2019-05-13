@@ -18,7 +18,7 @@ export class OrderListComponent implements OnInit {
   ngOnInit() {
     var id = this.auth.getUserID(localStorage.getItem('token')) 
     this.s
-      .listOrders(id)
+      .listOrders(id, 20,0)
       .subscribe((data: Order[]) => {
         this.orders = data;
     });

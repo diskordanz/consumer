@@ -7,5 +7,6 @@ type Location struct {
 	Locality     string `db:"inhabited_locality"`
 	Adress       string `db:"adress"`
 	OpeningHours string `db:"opening_hours"`
-	Type         string `db:"type"`
+	Latitude     string `db:"latitude"`
+	Longitude    string `db:"longitude"`
 }

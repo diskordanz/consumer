@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     var id = this.auth.getUserID(localStorage.getItem('token')) 
-    this.s.getCart(id).subscribe((data: CartItemByFranchise[]) => {
+    this.s.getCart(id, 20, 0).subscribe((data: CartItemByFranchise[]) => {
       this.cart = data;
   })
   }

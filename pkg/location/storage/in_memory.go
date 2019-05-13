@@ -14,12 +14,12 @@ type InMemoryLocationStorage struct {
 
 func NewInMemoryLocationStorage() InMemoryLocationStorage {
 	db := []model.Location{
-		model.Location{ID: 1, Type: "магазин", City: "Гомель", FranchiseID: 1, Locality: "Березки", Adress: "ул. 60 лет СССР, 10В", OpeningHours: "08:00-23:00"},
-		model.Location{ID: 2, Type: "магазин", City: "Гомель", FranchiseID: 1, Locality: "Большевик", Adress: "ул.Советская, 36", OpeningHours: "08:00-22:00"},
-		model.Location{ID: 3, Type: "магазин", City: "Гомель", FranchiseID: 1, Locality: "Брагин", Adress: "ул.Советская, 21", OpeningHours: "08:00-22:00"},
-		model.Location{ID: 4, Type: "магазин", City: "Гомель", FranchiseID: 1, Locality: "Гомель", Adress: "пр-т Речицкий, 5в", OpeningHours: "09:00-23:00"},
-		model.Location{ID: 5, Type: "магазин", City: "Гомель", FranchiseID: 2, Locality: "Гомель", Adress: "ул. Косарева 18", OpeningHours: "09:00-23:00"},
-		model.Location{ID: 6, Type: "магазин", City: "Минск", FranchiseID: 2, Locality: "Минск", Adress: "Игуменский тракт, 30", OpeningHours: "09:00-23:00"},
+		model.Location{ID: 1, City: "Гомель", FranchiseID: 1, Locality: "Березки", Adress: "ул. 60 лет СССР, 10В", OpeningHours: "08:00-23:00"},
+		model.Location{ID: 2, City: "Гомель", FranchiseID: 1, Locality: "Большевик", Adress: "ул.Советская, 36", OpeningHours: "08:00-22:00"},
+		model.Location{ID: 3, City: "Гомель", FranchiseID: 1, Locality: "Брагин", Adress: "ул.Советская, 21", OpeningHours: "08:00-22:00"},
+		model.Location{ID: 4, City: "Гомель", FranchiseID: 1, Locality: "Гомель", Adress: "пр-т Речицкий, 5в", OpeningHours: "09:00-23:00"},
+		model.Location{ID: 5, City: "Гомель", FranchiseID: 2, Locality: "Гомель", Adress: "ул. Косарева 18", OpeningHours: "09:00-23:00"},
+		model.Location{ID: 6, City: "Минск", FranchiseID: 2, Locality: "Минск", Adress: "Игуменский тракт, 30", OpeningHours: "09:00-23:00"},
 	}
 	return InMemoryLocationStorage{db: db}
 }

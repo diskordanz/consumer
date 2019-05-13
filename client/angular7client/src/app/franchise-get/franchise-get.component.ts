@@ -22,7 +22,7 @@ export class FranchiseGetComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.s.getFranchise(params['id']).subscribe((res: Franchise) => {
         this.franchise = res;})
-        this.s.listLocations(params['id']).subscribe((data: Location[]) => {
+        this.s.listLocations(params['id'], 20, 0).subscribe((data: Location[]) => {
         this.locations = data;});
     });
   }

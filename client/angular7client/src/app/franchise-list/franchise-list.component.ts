@@ -19,8 +19,9 @@ export class FranchiseListComponent implements OnInit {
  
   ngOnInit() {
     this.s
-      .listFranchises()
+      .listFranchises(20, 0)
       .subscribe((data: Franchise[]) => {
+        data.shift()
         this.franchises = data;
     });
   }
