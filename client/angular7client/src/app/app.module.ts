@@ -52,7 +52,7 @@ import { RegistrationComponent } from './registration/registration.component';
     BrowserAnimationsModule,
     MatSelectModule
   ],
-  providers: [/*AuthGuard,
+  providers: [AuthGuard,/*
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

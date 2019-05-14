@@ -1,12 +1,8 @@
 
-<div *ngIf="franchise">
+<div *ngIf="franchise" style="margin:50px;font-family: 'Courier New', Courier, monospace" >
   <img class="img-fluid" src={{pathToImage}}{{franchise.image}} width="50%"/>
-</div>
-<div class="row">
-  <div style="width:50%;">{{ franchise.name }}</div>
-  <div><button type="button" class="btn btn-dark btn-lg">За покупками!</button></div>
-</div>
-<table class="table table-hover">
+
+<table class="table table-hover" style="margin-top:40px;">
   <thead>
     <tr>
       <td>Адрес</td>
@@ -16,8 +12,9 @@
 
   <tbody>
       <tr *ngFor="let location of locations">
-          <td>{{ location.inhabited_locality}}, {{ location.address }}</td>
+          <td>{{ location.locality}}, {{ location.address }}</td>
           <td>{{ location.opening_hours }}</td>
       </tr>
   </tbody>
 </table>
+</div>

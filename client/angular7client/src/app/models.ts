@@ -5,9 +5,11 @@ export class Location {
   id: number;
   franchise_id: number;
   city: string;
-  inhabited_locality: string;
+  locality: string;
   opening_hours: string;
-  adress: string;
+  address: string;
+  latitude: string;
+  longitude: string;
 }
 
 export class Franchise {

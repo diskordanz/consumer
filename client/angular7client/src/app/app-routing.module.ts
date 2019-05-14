@@ -70,13 +70,13 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes
     )],
-  exports: [RouterModule]/*,
-  providers: [AuthGuard,
+  exports: [RouterModule],
+  providers: [AuthGuard/*,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
-  ],*/
+    }*/
+  ],
 })
 export class AppRoutingModule { }

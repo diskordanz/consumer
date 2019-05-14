@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 
+const pathToImage = "../../assets/img/"
 
 @Component({
   selector: 'app-product-list',
@@ -22,7 +23,8 @@ export class ProductListComponent implements OnInit {
   subscription: Subscription;
 
   constructor(private http: HttpClient, public router: ActivatedRoute, private s: CommonService, private auth: AuthService) { }
- 
+  public pathToImage = pathToImage;
+
   ngOnInit() {
     this.state$ = this.router.paramMap
     .pipe(map(() => window.history.state))

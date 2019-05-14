@@ -1,12 +1,12 @@
-<div *ngIf="cart == null"><h1>Cart is empty.</h1></div>
-<div *ngIf="cart">
+<div *ngIf="cart" style="margin:50px;font-family: 'Courier New', Courier, monospace" >
 <div *ngFor="let franchise_item of cart">
-<div>{{franchise_item.franchise_name}}</div>
 <table class="table table-hover">
   <thead>
     <tr>
-      <td>Product</td>
-      <td>Count</td>
+      <td><h4>{{franchise_item.franchise_name}}</h4></td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td></td>
 
     </tr>
@@ -14,12 +14,15 @@
 
   <tbody>
       <tr *ngFor="let cart_item of franchise_item.cart_items">
+          <td (click)="getProduct(cart_item.product.id)"><img class="img-fluid" style="width: 130px;" src={{pathToImage}}{{cart_item.product.image}}/></td>
           <td (click)="getProduct(cart_item.product.id)">{{ cart_item.product.name}}</td>
+          <td>{{ cart_item.product.price}} р.</td>
           <td><a (click)="delItem(cart_item)" class="btn">-</a>{{ cart_item.count }}<a (click)="addItem(cart_item)" class="btn">+</a></td>
           <td><a (click)="deleteCartItem(cart_item.id)" class="btn btn-danger">Delete</a></td>
       </tr>
   </tbody>
 </table>
-<td><a (click)="createOrder(franchise_item)" class="btn btn-danger">order</a></td>
+<div style="width: 100%; display: flex; justify-content: center; margin-bottom: 50px;"><a (click)="createOrder(franchise_item)" class="btn btn-danger" style="font-size:30px; color:white">ЗАКАЗАТЬ ЗА {{total(franchise_item.cart_items)}} р.</a></div>
 </div>
 </div>
+<div *ngIf="cart == null" style="margin:50px;font-family: 'Courier New', Courier, monospace"><h3>Cart is empty.</h3></div>

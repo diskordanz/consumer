@@ -1,3 +1,6 @@
-<p>
-  product-get works!
-</p>
+<div *ngIf="product" style="margin:100px;font-family: 'Courier New', Courier, monospace" >
+  <div><img class="img-fluid" style="width: 230px;" src={{pathToImage}}{{product.image}}/></div>
+  <div>{{product.name}}</div>
+  <div>{{product.price}} р.</div>
+  <div><button class="btn btn-danger" (click)="addToCart(product)">Add to Cart</button></div>
+  </div>

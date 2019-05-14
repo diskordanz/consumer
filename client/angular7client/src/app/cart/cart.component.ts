@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { summaryFileName } from '@angular/compiler/src/aot/util';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { containsElement } from '@angular/animations/browser/src/render/shared';
+const pathToImage = "../../assets/img/"
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,7 @@ import { containsElement } from '@angular/animations/browser/src/render/shared';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
+  public pathToImage = pathToImage;
 
   constructor(private s: CommonService, private auth: AuthService,private router: Router) { }
   cart: CartItemByFranchise[];

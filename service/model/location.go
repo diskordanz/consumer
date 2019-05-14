@@ -8,8 +8,8 @@ type Location struct {
 	ID           uint64 `json:"id"`
 	FranchiseID  int    `json:"franchise_id"`
 	City         string `json:"city"`
-	Locality     string `json:"inhabited_locality"`
-	Adress       string `json:"adress"`
+	Locality     string `json:"locality"`
+	Adress       string `json:"address"`
 	OpeningHours string `json:"opening_hours"`
 	Latitude     string `json:"latitude"`
 	Longitude    string `json:"longitude"`

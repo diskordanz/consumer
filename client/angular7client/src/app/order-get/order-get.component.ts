@@ -3,12 +3,15 @@ import { CommonService } from '../services/common.service';
 import { OrderItemWithProduct, OrderItem, Order , OrderWithItems, OrderWithItemsAndProducts, Product} from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 
+const pathToImage = "../../assets/img/"
+
 @Component({
   selector: 'app-order-get',
   templateUrl: './order-get.component.html',
   styleUrls: ['./order-get.component.css']
 })
 export class OrderGetComponent implements OnInit {
+  public pathToImage = pathToImage;
 
   order: OrderWithItemsAndProducts;
   constructor(private route: ActivatedRoute, private s: CommonService, private router: Router) { }
