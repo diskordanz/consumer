@@ -3,10 +3,10 @@ package service
 import (
 	"errors"
 
-	pkgFranchiseModel "github.com/diskordanz/consumer/pkg/franchise/model"
-	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
+	pkgFranchiseModel "github.com/diskordanz/web-consumer/pkg/franchise/model"
+	pkgProductModel "github.com/diskordanz/web-consumer/pkg/product/model"
 
-	"github.com/diskordanz/consumer/service/model"
+	"github.com/diskordanz/web-consumer/service/model"
 )
 
 func (s ConsumerService) GetFranchise(id int) (model.Franchise, error) {

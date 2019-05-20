@@ -11,7 +11,7 @@ import (
 	pb "github.com/iamnotjustice/web-metrics/pkg/api"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/diskordanz/consumer/service/model"
+	"github.com/diskordanz/web-consumer/service/model"
 	"github.com/gorilla/mux"
 )
 

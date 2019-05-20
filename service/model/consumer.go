@@ -1,9 +1,9 @@
 package model
 
 import (
-	pkgConsumerModel "github.com/diskordanz/consumer/pkg/consumer/model"
-	pkgFranchiseModel "github.com/diskordanz/consumer/pkg/franchise/model"
-	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
+	pkgConsumerModel "github.com/diskordanz/web-consumer/pkg/consumer/model"
+	pkgFranchiseModel "github.com/diskordanz/web-consumer/pkg/franchise/model"
+	pkgProductModel "github.com/diskordanz/web-consumer/pkg/product/model"
 )
 
 type Consumer struct {

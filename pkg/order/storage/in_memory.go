@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/ahmetb/go-linq"
-	"github.com/diskordanz/consumer/pkg/order/model"
+	"github.com/diskordanz/web-consumer/pkg/order/model"
 )
 
 type InMemoryOrderStorage struct {

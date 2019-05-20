@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/product/model"
-	"github.com/diskordanz/consumer/pkg/product/storage"
+	"github.com/diskordanz/web-consumer/pkg/product/model"
+	"github.com/diskordanz/web-consumer/pkg/product/storage"
 )
 
 type ProductHandler struct {

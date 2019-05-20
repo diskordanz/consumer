@@ -1,7 +1,7 @@
 package model
 
 import (
-	pkgFranchiseModel "github.com/diskordanz/consumer/pkg/franchise/model"
+	pkgFranchiseModel "github.com/diskordanz/web-consumer/pkg/franchise/model"
 )
 
 type Franchise struct {

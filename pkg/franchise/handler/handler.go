@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/franchise/model"
-	"github.com/diskordanz/consumer/pkg/franchise/storage"
+	"github.com/diskordanz/web-consumer/pkg/franchise/model"
+	"github.com/diskordanz/web-consumer/pkg/franchise/storage"
 )
 
 type FranchiseHandler struct {

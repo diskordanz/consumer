@@ -1,7 +1,7 @@
 package model
 
 import (
-	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
+	pkgProductModel "github.com/diskordanz/web-consumer/pkg/product/model"
 )
 
 type Product struct {

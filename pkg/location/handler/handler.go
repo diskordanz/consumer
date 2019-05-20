@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/location/model"
-	"github.com/diskordanz/consumer/pkg/location/storage"
+	"github.com/diskordanz/web-consumer/pkg/location/model"
+	"github.com/diskordanz/web-consumer/pkg/location/storage"
 )
 
 type LocationHandler struct {

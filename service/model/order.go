@@ -3,8 +3,8 @@ package model
 import (
 	"time"
 
-	pkgOrderModel "github.com/diskordanz/consumer/pkg/order/model"
-	pkgProductModel "github.com/diskordanz/consumer/pkg/product/model"
+	pkgOrderModel "github.com/diskordanz/web-consumer/pkg/order/model"
+	pkgProductModel "github.com/diskordanz/web-consumer/pkg/product/model"
 )
 
 type Order struct {

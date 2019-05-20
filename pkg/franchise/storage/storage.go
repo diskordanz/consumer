@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/diskordanz/consumer/pkg/franchise/model"
+	"github.com/diskordanz/web-consumer/pkg/franchise/model"
 )
 
 type FranchiseStorage interface {

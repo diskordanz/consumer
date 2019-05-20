@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/ahmetb/go-linq"
-	"github.com/diskordanz/consumer/pkg/location/model"
+	"github.com/diskordanz/web-consumer/pkg/location/model"
 )
 
 type InMemoryLocationStorage struct {

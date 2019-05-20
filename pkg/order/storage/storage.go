@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/diskordanz/consumer/pkg/order/model"
+	"github.com/diskordanz/web-consumer/pkg/order/model"
 )
 
 type OrderStorage interface {

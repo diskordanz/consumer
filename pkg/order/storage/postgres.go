@@ -3,7 +3,7 @@ package storage
 import (
 	"fmt"
 
-	"github.com/diskordanz/consumer/pkg/order/model"
+	"github.com/diskordanz/web-consumer/pkg/order/model"
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 )

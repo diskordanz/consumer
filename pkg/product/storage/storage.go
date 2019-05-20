@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/diskordanz/consumer/pkg/product/model"
+	"github.com/diskordanz/web-consumer/pkg/product/model"
 )
 
 type ProductStorage interface {

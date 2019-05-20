@@ -3,7 +3,7 @@ package storage
 import (
 	"errors"
 
-	"github.com/diskordanz/consumer/pkg/consumer/model"
+	"github.com/diskordanz/web-consumer/pkg/consumer/model"
 )
 
 type InMemoryConsumerStorage struct {

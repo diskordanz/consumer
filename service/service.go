@@ -1,14 +1,14 @@
 package service
 
 import (
-	cHandler "github.com/diskordanz/consumer/pkg/category/handler"
-	uHandler "github.com/diskordanz/consumer/pkg/consumer/handler"
-	fHandler "github.com/diskordanz/consumer/pkg/franchise/handler"
-	lHandler "github.com/diskordanz/consumer/pkg/location/handler"
-	oHandler "github.com/diskordanz/consumer/pkg/order/handler"
-	pHandler "github.com/diskordanz/consumer/pkg/product/handler"
+	cHandler "github.com/diskordanz/web-consumer/pkg/category/handler"
+	uHandler "github.com/diskordanz/web-consumer/pkg/consumer/handler"
+	fHandler "github.com/diskordanz/web-consumer/pkg/franchise/handler"
+	lHandler "github.com/diskordanz/web-consumer/pkg/location/handler"
+	oHandler "github.com/diskordanz/web-consumer/pkg/order/handler"
+	pHandler "github.com/diskordanz/web-consumer/pkg/product/handler"
 
-	"github.com/diskordanz/consumer/service/model"
+	"github.com/diskordanz/web-consumer/service/model"
 )
 
 type Service interface {

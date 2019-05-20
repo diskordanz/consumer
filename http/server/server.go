@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/diskordanz/consumer/service"
+	"github.com/diskordanz/web-consumer/service"
 	pb "github.com/iamnotjustice/web-metrics/pkg/api"
 
 	"github.com/gorilla/mux"

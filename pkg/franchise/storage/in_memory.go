@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/ahmetb/go-linq"
-	"github.com/diskordanz/consumer/pkg/franchise/model"
+	"github.com/diskordanz/web-consumer/pkg/franchise/model"
 )
 
 type InMemoryFranchiseStorage struct {

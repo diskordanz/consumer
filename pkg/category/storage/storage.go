@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/diskordanz/consumer/pkg/category/model"
+	"github.com/diskordanz/web-consumer/pkg/category/model"
 )
 
 type CategoryStorage interface {

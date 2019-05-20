@@ -1,7 +1,7 @@
 package model
 
 import (
-	pkgCategoryModel "github.com/diskordanz/consumer/pkg/category/model"
+	pkgCategoryModel "github.com/diskordanz/web-consumer/pkg/category/model"
 )
 
 type Category struct {

@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/order/model"
-	"github.com/diskordanz/consumer/pkg/order/storage"
+	"github.com/diskordanz/web-consumer/pkg/order/model"
+	"github.com/diskordanz/web-consumer/pkg/order/storage"
 )
 
 type OrderHandler struct {

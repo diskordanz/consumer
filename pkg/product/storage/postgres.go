@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/diskordanz/consumer/pkg/product/model"
+	"github.com/diskordanz/web-consumer/pkg/product/model"
 	"upper.io/db.v3"
 	"upper.io/db.v3/lib/sqlbuilder"
 )

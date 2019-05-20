@@ -1,7 +1,7 @@
 package model
 
 import (
-	pkgLocationModel "github.com/diskordanz/consumer/pkg/location/model"
+	pkgLocationModel "github.com/diskordanz/web-consumer/pkg/location/model"
 )
 
 type Location struct {

@@ -2,7 +2,7 @@ package storage
 
 import (
 	"github.com/ahmetb/go-linq"
-	"github.com/diskordanz/consumer/pkg/category/model"
+	"github.com/diskordanz/web-consumer/pkg/category/model"
 )
 
 type InMemoryCategoryStorage struct {

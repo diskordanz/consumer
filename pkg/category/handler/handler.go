@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/category/model"
-	"github.com/diskordanz/consumer/pkg/category/storage"
+	"github.com/diskordanz/web-consumer/pkg/category/model"
+	"github.com/diskordanz/web-consumer/pkg/category/storage"
 )
 
 type CategoryHandler struct {

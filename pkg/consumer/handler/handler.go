@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/diskordanz/consumer/pkg/consumer/model"
-	"github.com/diskordanz/consumer/pkg/consumer/storage"
+	"github.com/diskordanz/web-consumer/pkg/consumer/model"
+	"github.com/diskordanz/web-consumer/pkg/consumer/storage"
 )
 
 type ConsumerHandler struct {
