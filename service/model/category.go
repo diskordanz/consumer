@@ -1,6 +1,8 @@
 package model
 
 import (
+	"testing"
+
 	pkgCategoryModel "github.com/diskordanz/web-consumer/pkg/category/model"
 )
 
@@ -19,4 +21,7 @@ func MapToCategoryList(originList []pkgCategoryModel.Category) []Category {
 
 func MapToCategory(originCategory pkgCategoryModel.Category) Category {
 	return Category{ID: originCategory.ID, Name: originCategory.Name}
+}
+
+func TestMapToCategoryList(t *testing.T) {
 }

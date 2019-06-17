@@ -129,7 +129,17 @@ func (s ConsumerService) ListProducts(name string, count, offset int) ([]model.P
 	if err != nil {
 		return nil, err
 	}
-	result := model.MapToProductList(products)
+
+	var franchises []pkgFranchiseModel.Franchise
+	for _, k := range products {
+		franchise, err := s.fh.GetFranchise(int(k.FranchiseID))
+		if err != nil {
+			return nil, err
+		}
+		franchises = append(franchises, franchise)
+	}
+
+	result := model.MapToProductList(products, franchises)
 	return result, nil
 }
 
@@ -138,7 +148,16 @@ func (s ConsumerService) ListProductsByCategory(id uint64, name string, count, o
 	if err != nil {
 		return nil, err
 	}
-	result := model.MapToProductList(products)
+	var franchises []pkgFranchiseModel.Franchise
+	for _, k := range products {
+		franchise, err := s.fh.GetFranchise(int(k.FranchiseID))
+		if err != nil {
+			return nil, err
+		}
+		franchises = append(franchises, franchise)
+	}
+
+	result := model.MapToProductList(products, franchises)
 	return result, nil
 }
 

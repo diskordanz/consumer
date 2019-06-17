@@ -26,10 +26,11 @@ type CartItem struct {
 }
 
 type CartItemsByFranchise struct {
-	FranchiseID   uint64     `json:"franchise_id"`
-	FranchiseName string     `json:"franchise_name"`
-	CartItems     []CartItem `json:"cart_items"`
-	Total         float32    `json:"total"`
+	FranchiseID    uint64     `json:"franchise_id"`
+	FranchiseName  string     `json:"franchise_name"`
+	FranchiseImage string     `json:"franchise_image"`
+	CartItems      []CartItem `json:"cart_items"`
+	Total          float32    `json:"total"`
 }
 
 func MapToCart(originList []pkgConsumerModel.CartItem, originProducts []pkgProductModel.Product, franchises []pkgFranchiseModel.Franchise) []CartItemsByFranchise {
@@ -49,10 +50,11 @@ func add(cart []CartItemsByFranchise, item CartItem, franchise pkgFranchiseModel
 		}
 	}
 	cart = append(cart, CartItemsByFranchise{
-		FranchiseID:   franchise.ID,
-		FranchiseName: franchise.Name,
-		CartItems:     []CartItem{item},
-		Total:         item.Product.Price * float32(item.Count),
+		FranchiseID:    franchise.ID,
+		FranchiseName:  franchise.Name,
+		FranchiseImage: franchise.Image,
+		CartItems:      []CartItem{item},
+		Total:          item.Product.Price * float32(item.Count),
 	})
 	return cart
 }

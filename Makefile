@@ -20,3 +20,6 @@ build:
 		go build -o ./cmd/consumer/web-consumer -i ./cmd/consumer
 		docker build -t web-consumer ./cmd/consumer
 		rm ./cmd/consumer/web-consumer
+
+test:
+	go test -v --cover
